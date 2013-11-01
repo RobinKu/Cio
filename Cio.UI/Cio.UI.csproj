@@ -50,6 +50,7 @@
     <Compile Include="INeedElementResolver.cs" />
     <Compile Include="ManualEditableService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyDisplayNameService.cs" />
     <Compile Include="StaticEditableService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
