@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEditableService.cs" />
+    <Compile Include="DisplayNameService.cs" />
     <Compile Include="EditableService.cs" />
     <Compile Include="IDisplayNameService.cs" />
     <Compile Include="IEditableService.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="IElementResolver.cs" />
     <Compile Include="INeedElementResolver.cs" />
     <Compile Include="ManualEditableService.cs" />
+    <Compile Include="NestingDisplayNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyDisplayNameService.cs" />
     <Compile Include="StaticEditableService.cs" />
