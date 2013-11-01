@@ -19,17 +19,11 @@ using System;
 
 namespace Cio.UI
 {
-	public class ManualEditableService : BaseEditableService
+	internal class StaticEditableService : BaseEditableService
 	{
-		public void EnableEditing()
+		internal StaticEditableService(bool editable, string reason = null)
 		{
-			this.Editable = true;
-			this.DisabledReason = string.Empty;
-		}
-		
-		public void DisabledEditing(string reason)
-		{
-			this.Editable = false;
+			this.Editable = editable;
 			this.DisabledReason = reason;
 		}
 	}
