@@ -20,9 +20,9 @@ using System.Reflection;
 
 namespace Cio.UI
 {
-	public abstract class NestingDisplayNameService : IDisplayNameService
+	public abstract class NestingDisplayNameService : INestingDisplayNameService
 	{
-		Func<IDisplayNameService> getInnerDisplayNameService;
+		private Func<IDisplayNameService> getInnerDisplayNameService;
 		
 		protected NestingDisplayNameService()
 		{
@@ -34,18 +34,18 @@ namespace Cio.UI
 			this.getInnerDisplayNameService = () => innerDisplayNameService;
 		}
 		
+		public IDisplayNameService GetInnerDisplayNameService()
+		{
+			return this.getInnerDisplayNameService();
+		}
+		
 		public string GetDisplayName(object source, PropertyInfo property)
 		{
-			if (property == null)
-			{
-				throw new ArgumentNullException("property");
-			}
-			
 			string displayName;
 			
 			if (!this.TryGetDisplayName(source, property, out displayName))
 			{
-				displayName = getInnerDisplayNameService().GetDisplayName(source, property);
+				displayName = this.GetInnerDisplayNameService().GetDisplayName(source, property);
 			}
 			
 			return displayName;

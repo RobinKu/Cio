@@ -21,15 +21,73 @@ namespace Cio.UI
 {
 	public static class DisplayNameService
 	{
-		public static DisplayNameService()
+		private static IDisplayNameService defaultDisplayNameService;
+		
+		static DisplayNameService()
 		{
-			Default = new PropertyDisplayNameService();
+			defaultDisplayNameService = new PropertyDisplayNameService();
+			
+			ValidatingDefault += new ValidatingDisplayNameServiceEventHandler(CheckForRecursion);
 		}
+		
+		public static event ValidatingDisplayNameServiceEventHandler ValidatingDefault;
 		
 		public static IDisplayNameService Default
 		{
-			get;
-			set;
+			get
+			{
+				return defaultDisplayNameService;
+			}
+			set
+			{
+				if (value == null)
+				{
+					throw new ArgumentNullException("value", "The default DisplayNameService cannot be null.");
+				}
+				
+				OnValidatingDefault(value);
+				
+				defaultDisplayNameService = value;
+			}
+		}
+		
+		private static void OnValidatingDefault(IDisplayNameService displayNameService)
+		{
+			ValidatingDisplayNameServiceEventHandler handler = ValidatingDefault;
+			ValidatingDisplayNameServiceEventArgs eventArgs = new ValidatingDisplayNameServiceEventArgs(displayNameService);
+			
+			if (handler != null)
+			{
+				handler(null, eventArgs);
+			}
+			
+			if (!eventArgs.IsValid)
+			{
+				throw new DisplayNameServiceValidationException("Could not set the default DisplayNameService because it could not be validated. The following errors were given:", eventArgs.ErrorMessages);
+			}
+		}
+		
+		private static void CheckForRecursion(object source, ValidatingDisplayNameServiceEventArgs e)
+		{
+			INestingDisplayNameService nestingService = e.DisplayNameService as INestingDisplayNameService;
+			
+			if (nestingService != null)
+			{
+				INestingDisplayNameService nestedService = null;
+				
+				do
+				{
+					nestedService = nestingService.GetInnerDisplayNameService() as INestingDisplayNameService;
+					
+					if (nestingService == nestedService)
+					{
+						e.IsValid = false;
+						e.AddErrorMessage("One of the inner display name services is refering to the default display name service which is recursive and will cause a StackOverfowException.");
+						
+						return;
+					}
+				} while (nestedService != null);
+			}
 		}
 	}
 }
