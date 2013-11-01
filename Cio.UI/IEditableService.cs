@@ -22,7 +22,7 @@ namespace Cio.UI
 {
 	public interface IEditableService : INotifyPropertyChanged
 	{
-		event EventHandler EditableChanged
+		event EventHandler EditableChanged;
 		
 		bool Editable
 		{

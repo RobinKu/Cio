@@ -40,6 +40,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEditableService.cs" />
     <Compile Include="IDisplayNameService.cs" />
     <Compile Include="IEditableService.cs" />
     <Compile Include="IElementConfiguration.cs" />
