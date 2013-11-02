@@ -16,24 +16,21 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Collections.Generic;
 
-namespace Cio.UI
+namespace Cio.Collections.Generic
 {
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-	public class DisplayNameAttribute : Attribute
+	public static class DictionaryExtensions
 	{
-		private string name;
-		
-		public DisplayNameAttribute(string name)
+		public static void AddOrEdit<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key, TValue value)
 		{
-			this.name = name;
-		}
-		
-		public string Name
-		{
-			get
+			if (source.ContainsKey(key))
 			{
-				return this.name;
+				source[key] = value;
+			}
+			else
+			{
+				source.Add(key, value);
 			}
 		}
 	}

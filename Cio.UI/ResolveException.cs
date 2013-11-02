@@ -16,22 +16,25 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Linq;
+using Cio;
 
-namespace Cio.Reflection
+namespace Cio.UI
 {
-	public static class TypeExtensions
+	public class ResolveException : CioException
 	{
-		public static IEnumerable<T> GetCustomAttributes<T>(this Type type, bool inherit)
-			where T : Attribute
+		public ResolveException()
+			: base()
 		{
-			if (type == null)
-			{
-				throw new ArgumentNullException("type");
-			}
-			
-			return type.GetCustomAttributes(typeof(T),inherit)
-				.OfType<T>();
+		}
+		
+		public ResolveException(string message)
+			: base(message)
+		{
+		}
+		
+		public ResolveException(string message, Exception innerException)
+			: base (message, innerException)
+		{
 		}
 	}
 }

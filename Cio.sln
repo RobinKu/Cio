@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # SharpDevelop 4.3
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.UI", "Cio.UI\Cio.UI.csproj", "{130F17DD-0F3F-4446-8C35-5265CA6310EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.UI.Composition.Default", "Cio.UI.Composition.Default\Cio.UI.Composition.Default.csproj", "{690BA2E1-3FEF-4B68-9EC0-526EE200BC7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio", "Cio\Cio.csproj", "{43470FCD-2D83-4B18-8472-EA9B64F0FAA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,5 +18,13 @@ Global
 		{130F17DD-0F3F-4446-8C35-5265CA6310EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{130F17DD-0F3F-4446-8C35-5265CA6310EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{130F17DD-0F3F-4446-8C35-5265CA6310EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690BA2E1-3FEF-4B68-9EC0-526EE200BC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690BA2E1-3FEF-4B68-9EC0-526EE200BC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690BA2E1-3FEF-4B68-9EC0-526EE200BC7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690BA2E1-3FEF-4B68-9EC0-526EE200BC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43470FCD-2D83-4B18-8472-EA9B64F0FAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43470FCD-2D83-4B18-8472-EA9B64F0FAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43470FCD-2D83-4B18-8472-EA9B64F0FAA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43470FCD-2D83-4B18-8472-EA9B64F0FAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 EndGlobal
