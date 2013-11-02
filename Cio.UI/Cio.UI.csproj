@@ -40,11 +40,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributedDisplayNameService.cs" />
     <Compile Include="BaseEditableService.cs" />
-    <Compile Include="CioException.cs" />
+    <Compile Include="DisplayNameAttribute.cs" />
     <Compile Include="DisplayNameService.cs" />
     <Compile Include="DisplayNameServiceValidationException.cs" />
     <Compile Include="EditableService.cs" />
+    <Compile Include="global\CioException.cs" />
+    <Compile Include="global\Reflection\TypeExtensions.cs" />
     <Compile Include="IDisplayNameService.cs" />
     <Compile Include="IEditableService.cs" />
     <Compile Include="IElementConfiguration.cs" />
@@ -59,6 +62,10 @@
     <Compile Include="StaticEditableService.cs" />
     <Compile Include="ValidatingDisplayNameServiceEventArgs.cs" />
     <Compile Include="ValidatingDisplayNameServiceEventHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="global" />
+    <Folder Include="global\Reflection" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
