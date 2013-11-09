@@ -16,16 +16,16 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Windows.Controls;
+using Cio.UI;
 
-namespace Cio.UI
+namespace Cio.UI.Wpf
 {
-	public interface IElementFactory<TBinding>
+	public abstract class WpfElementFactory<T> : BaseElementFactory<T, Control>
 	{
-		object CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService);
-	}
-	
-	public interface IElementFactory<TBinding, TElementBase> : IElementFactory<TBinding>
-	{
-		new TElementBase CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService);
+		public override Control CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
