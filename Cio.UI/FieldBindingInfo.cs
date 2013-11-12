@@ -16,16 +16,39 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Windows.Controls;
-using Cio.UI;
 
-namespace Cio.UI.Wpf
+namespace Cio.UI
 {
-	public abstract class WpfElementFactory : BaseElementFactory<Control>
+	internal class FieldBindingInfo
 	{
-		public override Control CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService)
+		internal object Source
 		{
-			throw new NotImplementedException();
+			get;
+			set;
+		}
+		
+		internal string Path
+		{
+			get;
+			set;
+		}
+		
+		internal string Rendermode
+		{
+			get;
+			set;
+		}
+		
+		internal IEditableService EditableService
+		{
+			get;
+			set;
+		}
+		
+		internal IDisplayNameService DisplayNameService
+		{
+			get;
+			set;
 		}
 	}
 }

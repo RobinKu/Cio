@@ -39,18 +39,20 @@ namespace Cio.UI
 			return this.getInnerDisplayNameService();
 		}
 		
-		public string GetDisplayName(object source, PropertyInfo property)
+		public string GetDisplayName(object source, string bindingPath)
 		{
 			string displayName;
 			
-			if (!this.TryGetDisplayName(source, property, out displayName))
+			if (!this.TryGetDisplayName(source, bindingPath, out displayName))
 			{
-				displayName = this.GetInnerDisplayNameService().GetDisplayName(source, property);
+				IDisplayNameService innerDisplayNameService = this.GetInnerDisplayNameService();
+				
+				displayName = innerDisplayNameService.GetDisplayName(source, bindingPath);
 			}
 			
 			return displayName;
 		}
 		
-		protected abstract bool TryGetDisplayName(object source, PropertyInfo property, out string displayName);
+		protected abstract bool TryGetDisplayName(object source, string bindingPath, out string displayName);
 	}
 }

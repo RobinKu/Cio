@@ -54,8 +54,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColumnWrapPanel.cs" />
+    <Compile Include="UIElementGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIElementPair.cs" />
+    <Compile Include="UIElementPairCollection.cs" />
     <Compile Include="WpfElementFactory.cs" />
+    <Compile Include="WpfFormBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cio.UI\Cio.UI.csproj">

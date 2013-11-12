@@ -16,16 +16,12 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Windows.Controls;
-using Cio.UI;
+using System.Runtime.Serialization;
 
-namespace Cio.UI.Wpf
+namespace Cio.UI
 {
-	public abstract class WpfElementFactory : BaseElementFactory<Control>
+	public static class Rendermodes
 	{
-		public override Control CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService)
-		{
-			throw new NotImplementedException();
-		}
+		public const string EditorLabel = "editor_label";
 	}
 }

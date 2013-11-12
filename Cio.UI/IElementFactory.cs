@@ -19,13 +19,17 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IElementFactory<TBinding>
+	public interface IElementFactory
 	{
 		object CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService);
+		
+		object CreateElement(object objectToRender);
 	}
 	
-	public interface IElementFactory<TBinding, TElementBase> : IElementFactory<TBinding>
+	public interface IElementFactory<TElementBase> : IElementFactory
 	{
 		new TElementBase CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService);
+		
+		new TElementBase CreateElement(object objectToRender);
 	}
 }

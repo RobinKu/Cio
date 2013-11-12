@@ -16,16 +16,29 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Windows.Controls;
-using Cio.UI;
+using System.Runtime.Serialization;
 
-namespace Cio.UI.Wpf
+namespace Cio.UI
 {
-	public abstract class WpfElementFactory : BaseElementFactory<Control>
+	public class InvalidBindingPathException : Exception, ISerializable
 	{
-		public override Control CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService)
+		public InvalidBindingPathException()
 		{
-			throw new NotImplementedException();
+		}
+
+	 	public InvalidBindingPathException(string message)
+	 		: base(message)
+		{
+		}
+
+		public InvalidBindingPathException(string message, Exception innerException)
+			: base(message, innerException)
+		{
+		}
+
+		protected InvalidBindingPathException(SerializationInfo info, StreamingContext context)
+			: base(info, context)
+		{
 		}
 	}
 }

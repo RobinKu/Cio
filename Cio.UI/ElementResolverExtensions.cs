@@ -16,16 +16,30 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Windows.Controls;
-using Cio.UI;
+using System.Runtime.Serialization;
 
-namespace Cio.UI.Wpf
+namespace Cio.UI
 {
-	public abstract class WpfElementFactory : BaseElementFactory<Control>
+	public static class ElementResolverExtensions
 	{
-		public override Control CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService)
+		public IElementFactory Resolve<T>(this IElementResolver resolver)
 		{
-			throw new NotImplementedException();
+			if (resolver == null)
+			{
+				throw new ArgumentNullException("resolver");
+			}
+			
+			return resolver.Resolve(typeof(T));
+		}
+		
+		public IElementFactory Resolve<T>(this IElementFactory resolver, string rendermode)
+		{
+			if (resolver == null)
+			{
+				throw new ArgumentNullException("resolver");
+			}
+			
+			return resolver.Resolve(typeof(T), rendermode);
 		}
 	}
 }

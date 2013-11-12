@@ -32,8 +32,10 @@ namespace Cio.UI
 		{
 		}
 		
-		protected override bool TryGetDisplayName(object source, PropertyInfo property, out string displayName)
+		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
 		{
+			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
+			
 			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
 			
 			bool hasAttribute = att != null;

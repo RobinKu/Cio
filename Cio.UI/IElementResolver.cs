@@ -21,8 +21,8 @@ namespace Cio.UI
 {
 	public interface IElementResolver
 	{
-		IElementFactory<T> Resolve<T>();
+		IElementFactory Resolve(Type type);
 		
-		IElementFactory<T> Resolve<T>(string rendermode);
+		IElementFactory Resolve(Type type, string rendermode);
 	}
 }
