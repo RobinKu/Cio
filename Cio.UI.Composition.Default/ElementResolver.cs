@@ -35,25 +35,25 @@ namespace Cio.UI.Composition.Default
 			this.configuration = configuration;
 		}
 		
-		public IElementFactory<T> Resolve<T>()
+		public IElementFactory Resolve(Type type)
 		{
-			return Resolve<T>(null);
+			return Resolve(type, null);
 		}
 		
-		public IElementFactory<T> Resolve<T>(string rendermode)
+		public IElementFactory Resolve(Type type, string rendermode)
 		{
 			Type factoryType;
 			
-			if (!this.configuration.ElementFactoryTypes.TryGetValue(Tuple.Create(typeof(T), rendermode), out factoryType))
+			if (!this.configuration.ElementFactoryTypes.TryGetValue(Tuple.Create(type, rendermode), out factoryType))
 			{
-				factoryType = this.configuration.DefaultElementFactoryType.MakeGenericType(typeof(T));
+				factoryType = this.configuration.DefaultElementFactoryType.MakeGenericType(type);
 			}
 			
 			try
 			{
 				object factory = Activator.CreateInstance(factoryType);
 				
-				return (IElementFactory<T>)factory;
+				return (IElementFactory)factory;
 			}
 			catch (MissingMethodException ex)
 			{
@@ -65,7 +65,7 @@ namespace Cio.UI.Composition.Default
 			}
 			catch(InvalidCastException ex)
 			{
-				throw new ResolveException(string.Format("The configured element factory (of type {0}) does not implement {1}.", factoryType, typeof(IElementFactory<T>)), ex);
+				throw new ResolveException(string.Format("The configured element factory (of type {0}) does not implement {1}.", factoryType, typeof(IElementFactory)), ex);
 			}
 			catch (Exception ex)
 			{

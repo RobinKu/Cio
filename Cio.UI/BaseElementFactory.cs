@@ -21,18 +21,18 @@ namespace Cio.UI
 {
 	public abstract class BaseElementFactory<TElementBase> : IElementFactory<TElementBase>
 	{
-		public abstract TElementBase CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService);
+		public abstract TElementBase CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService);
 		
-		public abstract TElementBase CreateElement(object objectToRender);
+		public abstract TElementBase CreateElement(object objectToRender, string rendermode);
 		
-		object IElementFactory.CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService)
+		object IElementFactory.CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService)
 		{
-			return this.CreateElement(source, bindingPath, rendermode, editableService, displayNameService);
+			return this.CreateElement(source, bindingPath, rendermode, editableService);
 		}
 		
-		object IElementFactory.CreateElement(object objectToRender)
+		object IElementFactory.CreateElement(object objectToRender, string rendermode)
 		{
-			return this.CreateElement(objectToRender);
+			return this.CreateElement(objectToRender, rendermode);
 		}
 	}
 }

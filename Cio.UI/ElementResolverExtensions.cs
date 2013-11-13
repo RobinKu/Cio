@@ -22,7 +22,7 @@ namespace Cio.UI
 {
 	public static class ElementResolverExtensions
 	{
-		public IElementFactory Resolve<T>(this IElementResolver resolver)
+		public static IElementFactory Resolve<T>(this IElementResolver resolver)
 		{
 			if (resolver == null)
 			{
@@ -32,7 +32,7 @@ namespace Cio.UI
 			return resolver.Resolve(typeof(T));
 		}
 		
-		public IElementFactory Resolve<T>(this IElementFactory resolver, string rendermode)
+		public static IElementFactory Resolve<T>(this IElementResolver resolver, string rendermode)
 		{
 			if (resolver == null)
 			{

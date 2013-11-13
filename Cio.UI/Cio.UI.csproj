@@ -64,7 +64,7 @@
     <Compile Include="NestingDisplayNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyDisplayNameService.cs" />
-    <Compile Include="Rendermodes.cs" />
+    <Compile Include="RenderModes.cs" />
     <Compile Include="ResolveException.cs" />
     <Compile Include="StaticEditableService.cs" />
     <Compile Include="ValidatingDisplayNameServiceEventArgs.cs" />

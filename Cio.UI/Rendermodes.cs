@@ -20,8 +20,12 @@ using System.Runtime.Serialization;
 
 namespace Cio.UI
 {
-	public static class Rendermodes
+	public static class RenderModes
 	{
 		public const string EditorLabel = "editor_label";
+		
+		public const string Readonly = "readonly";
+		
+		public const string Multiline = "multiline";
 	}
 }

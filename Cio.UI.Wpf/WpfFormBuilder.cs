@@ -16,6 +16,7 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -52,14 +53,14 @@ namespace Cio.UI.Wpf
 			string displayName = displayNameService.GetDisplayName(source, bindingPath);
 			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
 			
-			IElementFactory labelFactory = this.resolver.Resolve<string>(Rendermodes.EditorLabel);
+			IElementFactory labelFactory = this.resolver.Resolve<string>(RenderModes.EditorLabel);
 			
-			object labelElement = labelFactory.CreateElement(displayName);
+			object labelElement = labelFactory.CreateElement(displayName, RenderModes.EditorLabel);
 			this.panel.Items.Add(labelElement);
 			
 			IElementFactory editorFactory = this.resolver.Resolve(property.PropertyType, rendermode);
 			
-			object editorElement = editorFactory.CreateElement(source, bindingPath, rendermode, editableService, displayNameService);
+			object editorElement = editorFactory.CreateElement(source, bindingPath, rendermode, editableService);
 			this.panel.Items.Add(editorElement);
 			
 			return editorElement;
