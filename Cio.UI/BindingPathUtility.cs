@@ -55,6 +55,7 @@ namespace Cio.UI
 					throw new InvalidBindingPathException(string.Format("The method {0} does not exist on type {1}", propertyName, currentType));
 				}
 				
+				currentType = info.PropertyType;
 				yield return info;
 			}
 		}

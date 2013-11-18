@@ -24,6 +24,7 @@ namespace TestApp
 	{
 		public User()
 		{
+			Profile = new UserProfile();
 		}
 		
 		[DisplayName("Naam")]
@@ -48,6 +49,21 @@ namespace TestApp
 		
 		[DisplayName("Actief")]
 		public bool IsActive
+		{
+			get;
+			set;
+		}
+		
+		public UserProfile Profile
+		{
+			get;
+			private set;
+		}
+	}
+	
+	public class UserProfile
+	{
+		public string Text
 		{
 			get;
 			set;
