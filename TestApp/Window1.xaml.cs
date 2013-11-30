@@ -55,11 +55,11 @@ namespace TestApp
 			CioForm form = new CioForm(formBuilder);
 			
 			User user = CreateUser();
-			form.Add(user, "Name");
-			form.Add(user, "Password", RenderModes.Readonly);
-			form.Add(user, "Signature", RenderModes.Multiline);
-			form.Add(user, "IsActive");
-			form.Add(user, "Profile.Text");
+			form.Add(() => user.Name);
+			form.Add(() => user.Password, RenderModes.Readonly);
+			form.Add(() => user.Signature, RenderModes.Multiline);
+			form.Add(() => user.IsActive);
+			form.Add(() => user.Profile.Text);
 			
 			grid.Children.Add((UIElement)form.RenderForm());
 		}

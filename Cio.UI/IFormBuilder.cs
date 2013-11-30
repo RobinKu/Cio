@@ -21,7 +21,7 @@ namespace Cio.UI
 {
 	public interface IFormBuilder
 	{
-		object Add(object source, string bindingPath, string rendermode, IEditableService editableService, IDisplayNameService displayNameService);
+		object Add(object source, string bindingPath, string rendermode = null, IEditableService editableService = null, IDisplayNameService displayNameService = null);
 		
 		object Form
 		{

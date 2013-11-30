@@ -17,6 +17,9 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Cio.UI
 {
@@ -45,6 +48,39 @@ namespace Cio.UI
 			info.DisplayNameService = displayNameService ?? DisplayNameService.Default;
 			
 			this.fieldInfos.Add(info);
+		}
+		
+		public void Add<TReturn>(Expression<Func<TReturn>> property, string rendermode = null, IEditableService editableService = null, IDisplayNameService displayNameService = null)
+		{
+			if (property == null)
+			{
+				throw new ArgumentNullException("property");
+			}
+			
+			ICollection<string> propertyNames = new List<string>();
+			Expression expr = property.Body;
+			
+			do
+			{
+				MemberExpression memExpr = (MemberExpression)expr;
+				
+				PropertyInfo propInfo = memExpr.Member as PropertyInfo;
+				
+				if(propInfo != null)
+				{
+					propertyNames.Add(propInfo.Name);
+				}
+				
+				expr = memExpr.Expression;
+			}
+			while (expr is MemberExpression);
+			
+			ConstantExpression constant = (ConstantExpression)expr;
+			object source = constant.Value.GetType().GetFields().First().GetValue(constant.Value);
+			
+			string propertyString = string.Join(".", propertyNames.Reverse());
+			
+			this.Add(source, propertyString, rendermode, editableService, displayNameService);
 		}
 		
 		public object RenderForm()
