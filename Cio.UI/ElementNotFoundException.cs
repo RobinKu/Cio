@@ -16,15 +16,22 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Cio.UI
 {
-	public class DisplayNameServiceValidationException : CioException
+	public class ElementNotFoundException : CioException
 	{
-		public DisplayNameServiceValidationException(string message, IEnumerable<string> errors)
-			: base(message + Environment.NewLine + string.Join(Environment.NewLine, errors.Select(s => " - " + s)))
+		public ElementNotFoundException()
+		{
+		}
+		
+		public ElementNotFoundException(string message)
+			: base(message)
+		{
+		}
+		
+		public ElementNotFoundException(string message, Exception innerException)
+			: base(message, innerException)
 		{
 		}
 	}

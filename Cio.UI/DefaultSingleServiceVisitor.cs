@@ -16,35 +16,18 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cio.UI
 {
-	public class AttributedDisplayNameService : NestingDisplayNameService
+	public abstract class DefaultSingleServiceVisitor<T> : DefaultServiceVisitor<T>
 	{
-		public AttributedDisplayNameService(IDisplayNameService innerDisplayNameService)
-			: base(innerDisplayNameService)
+		protected sealed override void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEnumerable<T> services)
 		{
+			Visit(labelElement, editorElement, source, bindingPath, renderMode, services.First());
 		}
 		
-		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
-		{
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
-			
-			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
-			
-			bool hasAttribute = att != null;
-			
-			if (hasAttribute)
-			{
-				displayName = att.Name;
-			}
-			else
-			{
-				displayName = null;
-			}
-			
-			return hasAttribute;
-		}
+		protected abstract void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, T service);
 	}
 }

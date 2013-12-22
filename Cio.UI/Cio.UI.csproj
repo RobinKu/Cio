@@ -9,9 +9,20 @@
     <AssemblyName>Cio.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <Prefer32Bit>False</Prefer32Bit>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -20,6 +31,7 @@
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -44,11 +56,13 @@
     <Compile Include="BaseEditableService.cs" />
     <Compile Include="BaseElementFactory.cs" />
     <Compile Include="BindingPathUtility.cs" />
+    <Compile Include="CioConfiguration.cs" />
     <Compile Include="CioForm.cs" />
+    <Compile Include="DefaultServiceVisitor.cs" />
+    <Compile Include="DefaultSingleServiceVisitor.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
-    <Compile Include="DisplayNameService.cs" />
-    <Compile Include="DisplayNameServiceValidationException.cs" />
     <Compile Include="EditableService.cs" />
+    <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
     <Compile Include="FieldBindingInfo.cs" />
     <Compile Include="IDisplayNameService.cs" />
@@ -60,6 +74,7 @@
     <Compile Include="INeedElementResolver.cs" />
     <Compile Include="INestingDisplayNameService.cs" />
     <Compile Include="InvalidBindingPathException.cs" />
+    <Compile Include="IServiceVisitor.cs" />
     <Compile Include="ManualEditableService.cs" />
     <Compile Include="NestingDisplayNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +82,6 @@
     <Compile Include="RenderModes.cs" />
     <Compile Include="ResolveException.cs" />
     <Compile Include="StaticEditableService.cs" />
-    <Compile Include="ValidatingDisplayNameServiceEventArgs.cs" />
-    <Compile Include="ValidatingDisplayNameServiceEventHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cio\Cio.csproj">

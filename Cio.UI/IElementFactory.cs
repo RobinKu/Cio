@@ -21,15 +21,19 @@ namespace Cio.UI
 {
 	public interface IElementFactory
 	{
-		object CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService);
+		object CreateElement(string renderMode);
 		
 		object CreateElement(object objectToRender, string rendermode);
+		
+		object CreateElement(object source, string bindingPath, string rendermode);
 	}
 	
 	public interface IElementFactory<TElementBase> : IElementFactory
 	{
-		new TElementBase CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService);
+		new TElementBase CreateElement(string renderMode);
 		
 		new TElementBase CreateElement(object objectToRender, string rendermode);
+		
+		new TElementBase CreateElement(object source, string bindingPath, string rendermode);
 	}
 }

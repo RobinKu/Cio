@@ -16,35 +16,26 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
+using System.Configuration;
 
-namespace Cio.UI
+namespace Cio.UI.Configuration
 {
-	public class AttributedDisplayNameService : NestingDisplayNameService
+	[ConfigurationCollection(typeof(ServiceVisitorElement), AddItemName = "serviceVisitor", CollectionType = ConfigurationElementCollectionType.BasicMap)]
+	public class ServiceVisitorsCollection : ConfigurationElementCollection
 	{
-		public AttributedDisplayNameService(IDisplayNameService innerDisplayNameService)
-			: base(innerDisplayNameService)
+		protected override object GetElementKey(ConfigurationElement element)
 		{
+			if (element == null)
+			{
+				throw new ArgumentNullException("element");
+			}
+			
+			return ((ServiceVisitorElement)element).Type;
 		}
 		
-		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
+		protected override ConfigurationElement CreateNewElement()
 		{
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
-			
-			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
-			
-			bool hasAttribute = att != null;
-			
-			if (hasAttribute)
-			{
-				displayName = att.Name;
-			}
-			else
-			{
-				displayName = null;
-			}
-			
-			return hasAttribute;
+			return new ServiceVisitorElement();
 		}
 	}
 }

@@ -15,7 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
-namespace Cio.UI
+using System;
+
+namespace Cio.Reflection
 {
-	public delegate void ValidatingDisplayNameServiceEventHandler(object source, ValidatingDisplayNameServiceEventArgs e);
+	public class InvalidPropertyExpressionException : CioException
+	{
+		public InvalidPropertyExpressionException()
+		{
+		}
+		
+		public InvalidPropertyExpressionException(string message)
+			: base(message)
+		{
+		}
+		
+		public InvalidPropertyExpressionException(string message, Exception innerException)
+			: base(message, innerException)
+		{
+		}
+	}
 }

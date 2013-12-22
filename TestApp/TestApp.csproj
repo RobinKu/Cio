@@ -11,9 +11,19 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -22,6 +32,7 @@
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -80,6 +91,10 @@
     <ProjectReference Include="..\Cio.UI.Composition.Default\Cio.UI.Composition.Default.csproj">
       <Project>{690BA2E1-3FEF-4B68-9EC0-526EE200BC7F}</Project>
       <Name>Cio.UI.Composition.Default</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cio.UI.Configuration\Cio.UI.Configuration.csproj">
+      <Project>{21B2E216-8089-4C54-99B1-F9DF8DAC8D1F}</Project>
+      <Name>Cio.UI.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cio.UI.Wpf\Cio.UI.Wpf.csproj">
       <Project>{5CA378B2-1FBD-46C4-BCB9-67BDA65343D4}</Project>

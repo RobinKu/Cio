@@ -16,35 +16,25 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
 
-namespace Cio.UI
+namespace Cio.UI.Wpf
 {
-	public class AttributedDisplayNameService : NestingDisplayNameService
+	public static class ElementConfigurationExtensions
 	{
-		public AttributedDisplayNameService(IDisplayNameService innerDisplayNameService)
-			: base(innerDisplayNameService)
+		public static IElementConfiguration RegisterDefaultControls(this IElementConfiguration configuration)
 		{
-		}
-		
-		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
-		{
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
-			
-			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
-			
-			bool hasAttribute = att != null;
-			
-			if (hasAttribute)
+			if (configuration == null)
 			{
-				displayName = att.Name;
-			}
-			else
-			{
-				displayName = null;
+				throw new ArgumentNullException("configuration");
 			}
 			
-			return hasAttribute;
+			configuration.RegisterType(typeof(string), typeof(StringElementFactory));
+			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.EditorLabel);
+			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.Readonly);
+			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.Multiline);
+			configuration.RegisterType(typeof(bool), typeof(BooleanElementFactory));
+			
+			return configuration;
 		}
 	}
 }

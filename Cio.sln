@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.UI.Wpf", "Cio.UI.Wpf\Ci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{371EA347-2E9D-4109-A285-43AC94E6EDC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.UI.Configuration", "Cio.UI.Configuration\Cio.UI.Configuration.csproj", "{21B2E216-8089-4C54-99B1-F9DF8DAC8D1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,5 +40,9 @@ Global
 		{371EA347-2E9D-4109-A285-43AC94E6EDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{371EA347-2E9D-4109-A285-43AC94E6EDC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{371EA347-2E9D-4109-A285-43AC94E6EDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B2E216-8089-4C54-99B1-F9DF8DAC8D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B2E216-8089-4C54-99B1-F9DF8DAC8D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B2E216-8089-4C54-99B1-F9DF8DAC8D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B2E216-8089-4C54-99B1-F9DF8DAC8D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 EndGlobal

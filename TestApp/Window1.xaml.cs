@@ -1,4 +1,5 @@
-﻿/*
+﻿#define use_config_file
+/*
  * Cio
  * Copyright (C) 2013 Robin Kuijstermans
  * 
@@ -24,9 +25,12 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+
 using Cio.UI;
 using Cio.UI.Composition.Default;
+using Cio.UI.Configuration;
 using Cio.UI.Wpf;
+using Cio.UI.Wpf.ServiceVisitors;
 
 namespace TestApp
 {
@@ -39,29 +43,33 @@ namespace TestApp
 		{
 			InitializeComponent();
 			
-			IElementConfiguration configuration = new ElementConfiguration();
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory));
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.EditorLabel);
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.Readonly);
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.Multiline);
-			configuration.RegisterType(typeof(bool), typeof(BooleanElementFactory));
+#if use_config_file
+			CioConfiguration config = ConfigurationLoader.Load();
+#else
+			CioConfiguration config = new CioConfiguration();
+			config.RegisterServiceVisitor(new DisplayNameServiceVisitor());
+			config.RegisterServiceVisitor(new EditableServiceVisitor());
+			config.RegisterService(CreateDisplayNameService());
 			
-			IElementResolver resolver = configuration.CreateResolver();
+			config.Elements = new ElementConfiguration();
+#endif
+			config.Elements.RegisterDefaultControls();
 			
-			DisplayNameService.Default = new AttributedDisplayNameService(DisplayNameService.Default);
+			IElementResolver resolver = config.Elements.CreateResolver();
 			
-			IFormBuilder formBuilder = new WpfFormBuilder(resolver);
+			IFormBuilder formBuilder = new WpfFormBuilder(config, resolver);
 			
-			CioForm form = new CioForm(formBuilder);
+			CioForm<User> form = new CioForm<User>(formBuilder);
+			
+			form.Add(u => u.Name);
+			form.Add(u => u.Password, RenderModes.Readonly);
+			form.Add(u => u.Signature, RenderModes.Multiline);
+			form.Add(u => u.IsActive);
+			form.Add(u => u.Profile.Text);
 			
 			User user = CreateUser();
-			form.Add(() => user.Name);
-			form.Add(() => user.Password, RenderModes.Readonly);
-			form.Add(() => user.Signature, RenderModes.Multiline);
-			form.Add(() => user.IsActive);
-			form.Add(() => user.Profile.Text);
 			
-			grid.Children.Add((UIElement)form.RenderForm());
+			grid.Children.Add((UIElement)form.RenderForm(user));
 		}
 		
 		private User CreateUser()
@@ -74,6 +82,13 @@ on multiple lines.";
 			user.IsActive = true;
 			
 			return user;
+		}
+		
+		private IDisplayNameService CreateDisplayNameService()
+		{
+			IDisplayNameService propertyNameDisplayService = new PropertyDisplayNameService();
+			
+			return new AttributedDisplayNameService(propertyNameDisplayService);
 		}
 	}
 }

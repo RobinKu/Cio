@@ -16,18 +16,13 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Collections.Generic;
 
 namespace Cio.UI
 {
 	internal class FieldBindingInfo
 	{
-		internal object Source
-		{
-			get;
-			set;
-		}
-		
-		internal string Path
+		internal string BindingPath
 		{
 			get;
 			set;
@@ -39,13 +34,7 @@ namespace Cio.UI
 			set;
 		}
 		
-		internal IEditableService EditableService
-		{
-			get;
-			set;
-		}
-		
-		internal IDisplayNameService DisplayNameService
+		internal IEnumerable<object> Services
 		{
 			get;
 			set;

@@ -21,11 +21,16 @@ namespace Cio.UI
 {
 	public interface IFormBuilder
 	{
-		object Add(object source, string bindingPath, string rendermode = null, IEditableService editableService = null, IDisplayNameService displayNameService = null);
+		object Add(object form, object source, string bindingPath, string rendermode = null, params object[] services);
 		
-		object Form
-		{
-			get;
-		}
+		object CreateForm();
+		
+		void RegisterServiceVisitor(IServiceVisitor serviceVisitor);
+		
+		void UnregisterServiceVisitor(IServiceVisitor serviceVisitor);
+		
+		void RegisterService(object service);
+		
+		void UnregisterService(object service);
 	}
 }

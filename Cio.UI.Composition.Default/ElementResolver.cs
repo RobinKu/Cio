@@ -46,7 +46,7 @@ namespace Cio.UI.Composition.Default
 			
 			if (!this.configuration.ElementFactoryTypes.TryGetValue(Tuple.Create(type, rendermode), out factoryType))
 			{
-				factoryType = this.configuration.DefaultElementFactoryType.MakeGenericType(type);
+				throw new ElementNotFoundException("No element factory was found.");
 			}
 			
 			try

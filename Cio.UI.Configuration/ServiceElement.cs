@@ -16,35 +16,31 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
+using System.Configuration;
 
-namespace Cio.UI
+namespace Cio.UI.Configuration
 {
-	public class AttributedDisplayNameService : NestingDisplayNameService
+	public class ServiceElement : ConfigurationElement
 	{
-		public AttributedDisplayNameService(IDisplayNameService innerDisplayNameService)
-			: base(innerDisplayNameService)
+		private const string nameAttributeName = "name";
+		private const string typeAttributeName = "type";
+		private const string innerServiceAttributeName = "innerService";
+		
+		public Type Type
 		{
+			get
+			{
+				return Type.GetType(TypeName);
+			}
 		}
 		
-		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
+		[ConfigurationProperty(typeAttributeName, IsRequired = true, IsKey = true)]
+		public string TypeName
 		{
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
-			
-			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
-			
-			bool hasAttribute = att != null;
-			
-			if (hasAttribute)
+			get
 			{
-				displayName = att.Name;
+				return (string)this[typeAttributeName];
 			}
-			else
-			{
-				displayName = null;
-			}
-			
-			return hasAttribute;
 		}
 	}
 }

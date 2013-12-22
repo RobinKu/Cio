@@ -23,10 +23,10 @@ namespace Cio.UI
 	{
 		IElementResolver CreateResolver();
 		
-		void RegisterDefault(Type elementFactory);
-		
 		void RegisterType(Type bindingType, Type elementFactoryType);
 		
 		void RegisterType(Type bindingType, Type elementFactoryType, string rendermode);
+		
+		void RegisterServiceVisitor(IServiceVisitor serviceVisitor);
 	}
 }

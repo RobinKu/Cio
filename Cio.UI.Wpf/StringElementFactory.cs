@@ -25,15 +25,20 @@ namespace Cio.UI.Wpf
 {
 	public class StringElementFactory : WpfElementFactory
 	{
+		public override FrameworkElement CreateElement(string renderMode)
+		{
+			return new TextBlock();
+		}
+		
 		public override FrameworkElement CreateElement(object objectToRender, string rendermode)
 		{
-			TextBlock txt = new TextBlock();
+			TextBlock txt = (TextBlock)CreateElement(rendermode);
 			txt.Text = objectToRender.ToString();
 			
 			return txt;
 		}
 		
-		public override FrameworkElement CreateElement(object source, string bindingPath, string rendermode, IEditableService editableService)
+		public override FrameworkElement CreateElement(object source, string bindingPath, string rendermode)
 		{
 			Binding binding = new Binding(bindingPath);
 			binding.Source = source;

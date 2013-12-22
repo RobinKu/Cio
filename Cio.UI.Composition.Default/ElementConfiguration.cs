@@ -24,8 +24,8 @@ namespace Cio.UI.Composition.Default
 {
 	public class ElementConfiguration : IElementConfiguration
 	{
-		private Type defaultElementFactoryType;
 		private IDictionary<Tuple<Type, string>, Type> elementFactoryTypes;
+		private IList<IServiceVisitor> serviceVisitors = new List<IServiceVisitor>();
 		
 		public ElementConfiguration()
 		{
@@ -35,16 +35,6 @@ namespace Cio.UI.Composition.Default
 		public IElementResolver CreateResolver()
 		{
 			return new ElementResolver(this);
-		}
-		
-		public void RegisterDefault(Type elementFactoryType)
-		{
-			if (elementFactoryType == null)
-			{
-				throw new ArgumentNullException("elementFactoryType");
-			}
-			
-			this.defaultElementFactoryType = elementFactoryType;
 		}
 		
 		public void RegisterType(Type bindingType, Type elementFactoryType)
@@ -66,20 +56,17 @@ namespace Cio.UI.Composition.Default
 			this.elementFactoryTypes.AddOrEdit(Tuple.Create(bindingType, rendermode), elementFactoryType);
 		}
 		
-		internal Type DefaultElementFactoryType
-		{
-			get
-			{
-				return this.defaultElementFactoryType;
-			}
-		}
-		
 		internal IDictionary<Tuple<Type, string>, Type> ElementFactoryTypes
 		{
 			get
 			{
 				return this.elementFactoryTypes;
 			}
+		}
+		
+		public void RegisterServiceVisitor(IServiceVisitor serviceVisitor)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

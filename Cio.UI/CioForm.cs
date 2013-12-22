@@ -20,10 +20,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Cio.Reflection;
 
 namespace Cio.UI
 {
-	public class CioForm
+	public class CioForm<T>
 	{
 		private IFormBuilder formBuilder;
 		private ICollection<FieldBindingInfo> fieldInfos = new List<FieldBindingInfo>();
@@ -38,59 +39,42 @@ namespace Cio.UI
 			this.formBuilder = formBuilder;
 		}
 		
-		public void Add(object source, string path, string rendermode = null, IEditableService editableService = null, IDisplayNameService displayNameService = null)
+		public void Add(string bindingPath, string rendermode = null, params object[] services)
 		{
 			FieldBindingInfo info = new FieldBindingInfo();
-			info.Source = source;
-			info.Path = path;
+			info.BindingPath = bindingPath;
 			info.Rendermode = rendermode;
-			info.EditableService = editableService ?? EditableService.AlwaysEditable;
-			info.DisplayNameService = displayNameService ?? DisplayNameService.Default;
+			info.Services = services;
 			
 			this.fieldInfos.Add(info);
 		}
 		
-		public void Add<TReturn>(Expression<Func<TReturn>> property, string rendermode = null, IEditableService editableService = null, IDisplayNameService displayNameService = null)
+		public void Add<TReturn>(Expression<Func<T, TReturn>> property, string rendermode = null, params object[] services)
 		{
-			if (property == null)
+			try
 			{
-				throw new ArgumentNullException("property");
+				IEnumerable<string> propertyNames = PropertyUtil.GetPropertyNames(property);
+				
+				string bindingPath = string.Join(".", propertyNames.Reverse());
+				
+				this.Add(bindingPath, rendermode, services);
 			}
-			
-			ICollection<string> propertyNames = new List<string>();
-			Expression expr = property.Body;
-			
-			do
+			catch (InvalidPropertyExpressionException ex)
 			{
-				MemberExpression memExpr = (MemberExpression)expr;
-				
-				PropertyInfo propInfo = memExpr.Member as PropertyInfo;
-				
-				if(propInfo != null)
-				{
-					propertyNames.Add(propInfo.Name);
-				}
-				
-				expr = memExpr.Expression;
+				throw new InvalidBindingPathException("Binding paths may only consist of properties.", ex);
 			}
-			while (expr is MemberExpression);
-			
-			ConstantExpression constant = (ConstantExpression)expr;
-			object source = constant.Value.GetType().GetFields().First().GetValue(constant.Value);
-			
-			string propertyString = string.Join(".", propertyNames.Reverse());
-			
-			this.Add(source, propertyString, rendermode, editableService, displayNameService);
 		}
 		
-		public object RenderForm()
+		public object RenderForm(T obj)
 		{
+			object form = this.formBuilder.CreateForm();
+			
 			foreach (FieldBindingInfo info in this.fieldInfos)
 			{
-				this.formBuilder.Add(info.Source, info.Path, info.Rendermode, info.EditableService, info.DisplayNameService);
+				this.formBuilder.Add(form, obj, info.BindingPath, info.Rendermode, info.Services);
 			}
 			
-			return this.formBuilder.Form;
+			return form;
 		}
 	}
 }

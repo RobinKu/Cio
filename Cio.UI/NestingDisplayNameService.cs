@@ -22,21 +22,16 @@ namespace Cio.UI
 {
 	public abstract class NestingDisplayNameService : INestingDisplayNameService
 	{
-		private Func<IDisplayNameService> getInnerDisplayNameService;
-		
-		protected NestingDisplayNameService()
-		{
-			this.getInnerDisplayNameService = () => DisplayNameService.Default;
-		}
+		private IDisplayNameService innerDisplayNameService;
 		
 		protected NestingDisplayNameService(IDisplayNameService innerDisplayNameService)
 		{
-			this.getInnerDisplayNameService = () => innerDisplayNameService;
+			this.innerDisplayNameService = innerDisplayNameService;
 		}
 		
 		public IDisplayNameService GetInnerDisplayNameService()
 		{
-			return this.getInnerDisplayNameService();
+			return this.innerDisplayNameService;
 		}
 		
 		public string GetDisplayName(object source, string bindingPath)
@@ -45,9 +40,7 @@ namespace Cio.UI
 			
 			if (!this.TryGetDisplayName(source, bindingPath, out displayName))
 			{
-				IDisplayNameService innerDisplayNameService = this.GetInnerDisplayNameService();
-				
-				displayName = innerDisplayNameService.GetDisplayName(source, bindingPath);
+				displayName = this.innerDisplayNameService.GetDisplayName(source, bindingPath);
 			}
 			
 			return displayName;

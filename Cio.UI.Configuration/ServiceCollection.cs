@@ -16,43 +16,26 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
+using System.Configuration;
 
-namespace Cio.UI
+namespace Cio.UI.Configuration
 {
-	public class ValidatingDisplayNameServiceEventArgs : EventArgs
+	[ConfigurationCollection(typeof(ServiceElement), AddItemName = "service", CollectionType = ConfigurationElementCollectionType.BasicMap)]
+	public class ServiceCollection : ConfigurationElementCollection
 	{
-		private ICollection<string> errorMessages = new List<string>();
-		
-		public ValidatingDisplayNameServiceEventArgs(IDisplayNameService displayNameService)
+		protected override object GetElementKey(ConfigurationElement element)
 		{
-			this.DisplayNameService = displayNameService;
-			this.IsValid = true;
-		}
-		
-		public IDisplayNameService DisplayNameService
-		{
-			get;
-			private set;
-		}
-		
-		public bool IsValid
-		{
-			get;
-			set;
-		}
-		
-		public void AddErrorMessage(string message)
-		{
-			this.errorMessages.Add(message);
-		}
-		
-		public IEnumerable<string> ErrorMessages
-		{
-			get
+			if (element == null)
 			{
-				return this.errorMessages;
+				throw new ArgumentNullException("element");
 			}
+			
+			return ((ServiceElement)element).Type;
+		}
+		
+		protected override ConfigurationElement CreateNewElement()
+		{
+			return new ServiceElement();
 		}
 	}
 }
