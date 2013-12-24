@@ -26,62 +26,20 @@ namespace Cio.UI.Wpf
 {
 	public class WpfFormBuilder : IFormBuilder
 	{
-		private CioConfiguration configuration;
 		private IElementResolver resolver;
-		private IList<IServiceVisitor> serviceVisitors = new List<IServiceVisitor>();
-		private IList<object> services = new List<object>();
-		
-		public WpfFormBuilder(CioConfiguration configuration, IElementResolver resolver)
+
+		public WpfFormBuilder(IElementResolver resolver)
 		{
-			if (configuration == null)
-			{
-				throw new ArgumentNullException("configuration");
-			}
-			else if (resolver == null)
+			if (resolver == null)
 			{
 				throw new ArgumentNullException("resolver");
 			}
 			
-			this.configuration = configuration;
 			this.resolver = resolver;
 		}
 		
-		private IEnumerable<IServiceVisitor> ServiceVisitors
-		{
-			get
-			{
-				return this.serviceVisitors.Concat(this.configuration.ServiceVisitors);
-			}
-		}
-		
-		private IEnumerable<object> Services
-		{
-			get
-			{
-				return this.services.Concat(this.configuration.Services);
-			}
-		}
-		
-		public void RegisterServiceVisitor(IServiceVisitor serviceVisitor)
-		{
-			this.serviceVisitors.Add(serviceVisitor);
-		}
-		
-		public void UnregisterServiceVisitor(IServiceVisitor serviceVisitor)
-		{
-			this.serviceVisitors.Remove(serviceVisitor);
-		}
-		
-		public void RegisterService(object service)
-		{
-			this.services.Add(service);
-		}
-		
-		public void UnregisterService(object service)
-		{
-			this.services.Remove(service);
-		}
-		
+		public event EventHandler<ElementPairAddedEventArgs> ElementPairAdded;
+
 		public object CreateForm()
 		{
 			ItemsControl panel = new ItemsControl();
@@ -92,15 +50,15 @@ namespace Cio.UI.Wpf
             return panel;
 		}
 		
-		public object Add(object form, object source, string bindingPath, string rendermode, params object[] services)
+		public object Add(object form, object source, FieldBindingInfo bindingInfo)
 		{
 			if (form == null)
 			{
 				throw new ArgumentNullException("form");
 			}
-			else if (services == null)
+			else if (bindingInfo == null)
 			{
-				throw new ArgumentNullException("services");
+				throw new ArgumentNullException("bindingInfo");
 			}
 			
 			ItemsControl panel = form as ItemsControl;
@@ -110,6 +68,8 @@ namespace Cio.UI.Wpf
 				throw new ArgumentException("form must derive from ItemsControl. Use the CreateForm() method of the formbuilder to create the right type.");
 			}
 			
+			string bindingPath = bindingInfo.BindingPath;
+			string rendermode = bindingInfo.Rendermode;
 			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
 			
 			IElementFactory labelFactory = this.resolver.Resolve<string>(RenderModes.EditorLabel);
@@ -118,18 +78,24 @@ namespace Cio.UI.Wpf
 			IElementFactory editorFactory = this.resolver.Resolve(property.PropertyType, rendermode);
 			object editorElement = editorFactory.CreateElement(source, bindingPath, rendermode);
 			
-			if (services.Length > 0)
-			{
-				foreach (IServiceVisitor visitor in ServiceVisitors)
-				{
-					visitor.Visit(labelElement, editorElement, source, bindingPath, rendermode, services.Concat(this.Services));
-				}
-			}
-			
 			panel.Items.Add(labelElement);
 			panel.Items.Add(editorElement);
 			
+			OnElementPairAdded(labelElement, editorElement, source, bindingInfo);
+			
 			return editorElement;
+		}
+		
+		private void OnElementPairAdded(object labelElement, object editorElement, object source, FieldBindingInfo bindingInfo)
+		{
+			EventHandler<ElementPairAddedEventArgs> handler = ElementPairAdded;
+			
+			if (handler != null)
+			{
+				ElementPairAddedEventArgs ev = new ElementPairAddedEventArgs(labelElement, editorElement, source, bindingInfo);
+				
+				handler(this, ev);
+			}
 		}
 	}
 }

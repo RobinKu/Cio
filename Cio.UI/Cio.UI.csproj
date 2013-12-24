@@ -63,6 +63,7 @@
     <Compile Include="DisplayNameAttribute.cs" />
     <Compile Include="EditableService.cs" />
     <Compile Include="ElementNotFoundException.cs" />
+    <Compile Include="ElementPairAddedEventArgs.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
     <Compile Include="FieldBindingInfo.cs" />
     <Compile Include="IDisplayNameService.cs" />
@@ -74,7 +75,9 @@
     <Compile Include="INeedElementResolver.cs" />
     <Compile Include="INestingDisplayNameService.cs" />
     <Compile Include="InvalidBindingPathException.cs" />
+    <Compile Include="IServiceRegistrable.cs" />
     <Compile Include="IServiceVisitor.cs" />
+    <Compile Include="IServiceVisitorRegistrable.cs" />
     <Compile Include="ManualEditableService.cs" />
     <Compile Include="NestingDisplayNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

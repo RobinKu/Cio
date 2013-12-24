@@ -19,12 +19,10 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IFormBuilder
+	public interface IServiceRegistrable
 	{
-		event EventHandler<ElementPairAddedEventArgs> ElementPairAdded;
+		void RegisterService(object service);
 		
-		object Add(object form, object source, FieldBindingInfo bindingInfo);
-		
-		object CreateForm();
+		void UnregisterService(object service);
 	}
 }

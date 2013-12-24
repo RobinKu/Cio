@@ -57,9 +57,9 @@ namespace TestApp
 			
 			IElementResolver resolver = config.Elements.CreateResolver();
 			
-			IFormBuilder formBuilder = new WpfFormBuilder(config, resolver);
+			IFormBuilder formBuilder = new WpfFormBuilder(resolver);
 			
-			CioForm<User> form = new CioForm<User>(formBuilder);
+			CioForm<User> form = new CioForm<User>(config, formBuilder);
 			
 			form.Add(u => u.Name);
 			form.Add(u => u.Password, RenderModes.Readonly);

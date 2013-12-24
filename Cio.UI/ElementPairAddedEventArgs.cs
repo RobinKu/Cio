@@ -16,28 +16,54 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
 
 namespace Cio.UI
 {
-	public class FieldBindingInfo
+	public class ElementPairAddedEventArgs : EventArgs
 	{
-		public string BindingPath
+		private object labelElement;
+		private object editorElement;
+		private object source;
+		private FieldBindingInfo bindingInfo;
+		
+		public ElementPairAddedEventArgs(object labelElement, object editorElement, object source, FieldBindingInfo bindingInfo)
 		{
-			get;
-			set;
+			this.labelElement = labelElement;
+			this.editorElement = editorElement;
+			this.source = source;
+			this.bindingInfo = bindingInfo;
 		}
 		
-		public string Rendermode
+		public object LabelElement
 		{
-			get;
-			set;
+			get
+			{
+				return this.labelElement;
+			}
 		}
 		
-		public IEnumerable<object> Services
+		public object EditorElement
 		{
-			get;
-			set;
+			get
+			{
+				return this.editorElement;
+			}
+		}
+		
+		public object Source
+		{
+			get
+			{
+				return this.source;
+			}
+		}
+		
+		public FieldBindingInfo BindingInfo
+		{
+			get
+			{
+				return this.bindingInfo;
+			}
 		}
 	}
 }

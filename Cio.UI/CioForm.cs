@@ -24,19 +24,45 @@ using Cio.Reflection;
 
 namespace Cio.UI
 {
-	public class CioForm<T>
+	public class CioForm<T> : IServiceRegistrable, IServiceVisitorRegistrable
 	{
+		private CioConfiguration config;
 		private IFormBuilder formBuilder;
 		private ICollection<FieldBindingInfo> fieldInfos = new List<FieldBindingInfo>();
+		private IList<IServiceVisitor> serviceVisitors = new List<IServiceVisitor>();
+		private IList<object> services = new List<object>();
 		
-		public CioForm(IFormBuilder formBuilder)
+		public CioForm(CioConfiguration config, IFormBuilder formBuilder)
 		{
-			if (formBuilder == null)
+			if (config == null)
+			{
+				throw new ArgumentNullException("config");
+			}
+			else if (formBuilder == null)
 			{
 				throw new ArgumentNullException("formBuilder");
 			}
 			
+			this.config = config;
 			this.formBuilder = formBuilder;
+			
+			this.formBuilder.ElementPairAdded += new EventHandler<ElementPairAddedEventArgs>(ExecuteServiceVisitorsAfterAdd);
+		}
+		
+		private IEnumerable<object> GeneralServices
+		{
+			get
+			{
+				return this.services.Concat(this.config.Services);
+			}
+		}
+		
+		private IEnumerable<IServiceVisitor> ServiceVisitors
+		{
+			get
+			{
+				return this.serviceVisitors.Concat(this.config.ServiceVisitors);
+			}
 		}
 		
 		public void Add(string bindingPath, string rendermode = null, params object[] services)
@@ -71,10 +97,69 @@ namespace Cio.UI
 			
 			foreach (FieldBindingInfo info in this.fieldInfos)
 			{
-				this.formBuilder.Add(form, obj, info.BindingPath, info.Rendermode, info.Services);
+				this.formBuilder.Add(form, obj, info);
 			}
 			
 			return form;
+		}
+		
+		private void ExecuteServiceVisitorsAfterAdd(object sender, ElementPairAddedEventArgs ev)
+		{
+			object labelElement = ev.LabelElement;
+			object editorElement = ev.EditorElement;
+			object source = ev.Source;
+			string bindingPath = ev.BindingInfo.BindingPath;
+			string rendermode = ev.BindingInfo.Rendermode;
+			IEnumerable<object> services = ev.BindingInfo.Services;
+			IEnumerable<object> allServices = services.Concat(GeneralServices);
+			
+			if (allServices.Any())
+			{
+				foreach (IServiceVisitor visitor in ServiceVisitors)
+				{
+					visitor.Visit(labelElement, editorElement, source, bindingPath, rendermode, allServices);
+				}
+			}
+		}
+		
+		public void RegisterService(object service)
+		{
+			if (service == null)
+			{
+				throw new ArgumentNullException("service");
+			}
+			
+			this.services.Add(service);
+		}
+		
+		public void UnregisterService(object service)
+		{
+			if (service == null)
+			{
+				throw new ArgumentNullException("service");
+			}
+			
+			this.services.Remove(service);
+		}
+		
+		public void RegisterServiceVisitor(IServiceVisitor serviceVisitor)
+		{
+			if (serviceVisitor == null)
+			{
+				throw new ArgumentNullException("serviceVisitor");
+			}
+			
+			this.serviceVisitors.Add(serviceVisitor);
+		}
+		
+		public void UnregisterServiceVistor(IServiceVisitor serviceVisitor)
+		{
+			if (serviceVisitor == null)
+			{
+				throw new ArgumentNullException("serviceVisitor");
+			}
+			
+			this.serviceVisitors.Remove(serviceVisitor);
 		}
 	}
 }
