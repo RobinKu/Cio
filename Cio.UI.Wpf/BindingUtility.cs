@@ -16,63 +16,35 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using Cio.UI;
+using System.Windows;
+using System.Windows.Data;
 
-namespace TestApp
+namespace Cio.UI.Wpf
 {
-	public class User
+	public static class BindingUtility
 	{
-		public User()
+		public static Binding CreateBinding(object source, string bindingPath)
 		{
-			Profile = new UserProfile();
+			Binding binding = new Binding(bindingPath);
+			binding.Source = source;
+			
+			return binding;
 		}
 		
-		[DisplayName("Naam")]
-		public string Name
+		public static void AddBinding(FrameworkElement element, DependencyProperty property, object source, string bindingPath)
 		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Wachtwoord")]
-		public string Password
-		{
-			get;
-			set;
-		}
-		
-		public string Signature
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
-	}
-	
-	public class UserProfile
-	{
-		public string Text
-		{
-			get;
-			set;
+			if (element == null)
+			{
+				throw new ArgumentNullException("element");
+			}
+			else if (property == null)
+			{
+				throw new ArgumentNullException("property");
+			}
+			
+			Binding binding = CreateBinding(source, bindingPath);
+			
+			element.SetBinding(property, binding);
 		}
 	}
 }

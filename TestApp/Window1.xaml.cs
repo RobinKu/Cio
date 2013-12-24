@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -41,6 +42,9 @@ namespace TestApp
 	{
 		public Window1()
 		{
+			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+			
 			InitializeComponent();
 			
 #if use_config_file
@@ -63,8 +67,9 @@ namespace TestApp
 			
 			form.Add(u => u.Name);
 			form.Add(u => u.Password, RenderModes.Readonly);
-			form.Add(u => u.Signature, RenderModes.Multiline);
+			form.Add(u => u.Signature, RenderModes.Multiline, new SpellCheckService());
 			form.Add(u => u.IsActive);
+			form.Add(u => u.DateOfBirth, RenderModes.DateOnly);
 			form.Add(u => u.Profile.Text);
 			
 			User user = CreateUser();
@@ -80,6 +85,7 @@ namespace TestApp
 			user.Signature = @"This is a signature
 on multiple lines.";
 			user.IsActive = true;
+			user.DateOfBirth = new DateTime(1986, 5, 1);
 			
 			return user;
 		}

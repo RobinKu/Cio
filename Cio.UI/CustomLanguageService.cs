@@ -16,63 +16,27 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using Cio.UI;
+using System.Globalization;
 
-namespace TestApp
+namespace Cio.UI
 {
-	public class User
+	public class CustomLanguageService : ILanguageService
 	{
-		public User()
+		private CultureInfo culture;
+		
+		public CustomLanguageService(CultureInfo culture)
 		{
-			Profile = new UserProfile();
+			if (culture == null)
+			{
+				throw new ArgumentNullException("culture");
+			}
+			
+			this.culture = culture;
 		}
 		
-		[DisplayName("Naam")]
-		public string Name
+		public CultureInfo GetCulture()
 		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Wachtwoord")]
-		public string Password
-		{
-			get;
-			set;
-		}
-		
-		public string Signature
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
-	}
-	
-	public class UserProfile
-	{
-		public string Text
-		{
-			get;
-			set;
+			return this.culture;
 		}
 	}
 }

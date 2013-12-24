@@ -73,7 +73,7 @@ namespace Cio.UI
 		
 		private bool ValidateElementType(Type elementType, Type neededType)
 		{
-			return neededType == null || neededType == elementType;
+			return neededType == null || neededType.IsAssignableFrom(elementType);
 		}
 		
 		private bool ValidateRenderMode(string renderMode)

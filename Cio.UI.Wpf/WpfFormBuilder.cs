@@ -118,12 +118,9 @@ namespace Cio.UI.Wpf
 			IElementFactory editorFactory = this.resolver.Resolve(property.PropertyType, rendermode);
 			object editorElement = editorFactory.CreateElement(source, bindingPath, rendermode);
 			
-			if (services.Length > 0)
+			foreach (IServiceVisitor visitor in ServiceVisitors)
 			{
-				foreach (IServiceVisitor visitor in ServiceVisitors)
-				{
-					visitor.Visit(labelElement, editorElement, source, bindingPath, rendermode, services.Concat(this.Services));
-				}
+				visitor.Visit(labelElement, editorElement, source, bindingPath, rendermode, services.Concat(this.Services));
 			}
 			
 			panel.Items.Add(labelElement);

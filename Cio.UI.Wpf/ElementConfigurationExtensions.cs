@@ -16,6 +16,7 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using Cio.UI.Wpf.ElementFactories;
 
 namespace Cio.UI.Wpf
 {
@@ -28,11 +29,13 @@ namespace Cio.UI.Wpf
 				throw new ArgumentNullException("configuration");
 			}
 			
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory));
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.EditorLabel);
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.Readonly);
-			configuration.RegisterType(typeof(string), typeof(StringElementFactory), RenderModes.Multiline);
-			configuration.RegisterType(typeof(bool), typeof(BooleanElementFactory));
+			configuration.RegisterType(typeof(string), typeof(TextBoxFactory));
+			configuration.RegisterType(typeof(string), typeof(TextBlockFactory), RenderModes.EditorLabel);
+			configuration.RegisterType(typeof(string), typeof(TextBlockFactory), RenderModes.Readonly);
+			configuration.RegisterType(typeof(string), typeof(TextBoxFactory), RenderModes.Multiline);
+			configuration.RegisterType(typeof(bool), typeof(CheckBoxFactory));
+			configuration.RegisterType(typeof(DateTime), typeof(CalendarFactory));
+			configuration.RegisterType(typeof(DateTime), typeof(CalendarFactory), RenderModes.DateOnly);
 			
 			return configuration;
 		}

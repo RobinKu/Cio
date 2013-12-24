@@ -16,36 +16,24 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows.Markup;
 
-namespace Cio.UI.Wpf
+namespace Cio.UI.Wpf.ServiceVisitors
 {
-	public class BooleanElementFactory : WpfElementFactory
+	public class LanguageServiceVisitor : DefaultSingleServiceVisitor<ILanguageService>
 	{
-		public override FrameworkElement CreateElement(string renderMode)
+		public LanguageServiceVisitor()
 		{
-			return new CheckBox();
+			SetEditorElementType<FrameworkElement>();
 		}
 		
-		public override FrameworkElement CreateElement(object objectToRender, string rendermode)
+		protected override void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, ILanguageService service)
 		{
-			ContentControl cb = (ContentControl)this.CreateElement(rendermode);
-			cb.Content = objectToRender;
+			FrameworkElement element = (FrameworkElement)editorElement;
 			
-			return cb;
-		}
-		
-		public override FrameworkElement CreateElement(object source, string bindingPath, string rendermode)
-		{
-			Binding binding = new Binding(bindingPath);
-			binding.Source = source;
-			
-			FrameworkElement cb = (FrameworkElement)CreateElement(rendermode);
-			cb.SetBinding(CheckBox.IsCheckedProperty, binding);
-			
-			return cb;
+			element.Language = XmlLanguage.GetLanguage(service.GetCulture().Name);
 		}
 	}
 }

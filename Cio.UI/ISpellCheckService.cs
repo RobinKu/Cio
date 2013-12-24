@@ -16,13 +16,17 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Windows;
+using System.Globalization;
 
-using Cio.UI;
-
-namespace Cio.UI.Wpf
+namespace Cio.UI
 {
-	public abstract class WpfElementFactory : BaseElementFactory<FrameworkElement>
+	public interface ISpellCheckService
 	{
+		bool UseDefaultCulture
+		{
+			get;
+		}
+		
+		CultureInfo GetCulture();
 	}
 }

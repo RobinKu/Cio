@@ -16,63 +16,39 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using Cio.UI;
+using System.Globalization;
 
-namespace TestApp
+namespace Cio.UI
 {
-	public class User
+	public class SpellCheckService : ISpellCheckService
 	{
-		public User()
+		private CultureInfo culture;
+		
+		public SpellCheckService()
 		{
-			Profile = new UserProfile();
 		}
 		
-		[DisplayName("Naam")]
-		public string Name
+		public SpellCheckService(CultureInfo culture)
 		{
-			get;
-			set;
+			if (culture == null)
+			{
+				throw new ArgumentNullException("culture");
+			}
+			
+			this.culture = culture;
 		}
 		
-		[DisplayName("Wachtwoord")]
-		public string Password
+		public bool UseDefaultCulture
 		{
-			get;
-			set;
+			get
+			{
+				return this.culture == null;
+			}
 		}
 		
-		public string Signature
+		public CultureInfo GetCulture()
 		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
-	}
-	
-	public class UserProfile
-	{
-		public string Text
-		{
-			get;
-			set;
+			return this.culture;
 		}
 	}
 }

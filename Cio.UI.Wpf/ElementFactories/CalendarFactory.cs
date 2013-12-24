@@ -16,63 +16,35 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using Cio.UI;
+using System.Windows.Controls;
 
-namespace TestApp
+namespace Cio.UI.Wpf.ElementFactories
 {
-	public class User
+	public class CalendarFactory : WpfElementFactory<Calendar>
 	{
-		public User()
+		public override Calendar CreateElement(string renderMode)
 		{
-			Profile = new UserProfile();
+			Calendar cal = new Calendar();
+			
+			return cal;
 		}
 		
-		[DisplayName("Naam")]
-		public string Name
+		public override Calendar CreateElement(object objectToRender, string rendermode)
 		{
-			get;
-			set;
+			Calendar cal = this.CreateElement(rendermode);
+			
+			cal.DisplayDate = Convert.ToDateTime(objectToRender);
+			
+			return cal;
 		}
 		
-		[DisplayName("Wachtwoord")]
-		public string Password
+		public override Calendar CreateElement(object source, string bindingPath, string rendermode)
 		{
-			get;
-			set;
-		}
-		
-		public string Signature
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
-	}
-	
-	public class UserProfile
-	{
-		public string Text
-		{
-			get;
-			set;
+			Calendar cal = this.CreateElement(rendermode);
+			
+			BindingUtility.AddBinding(cal, Calendar.DisplayDateProperty, source, bindingPath);
+			
+			return cal;
 		}
 	}
 }

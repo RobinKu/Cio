@@ -22,10 +22,17 @@ namespace Cio.UI
 {
 	public static class RenderModes
 	{
+		// General
+		public const string Default = null;
+		
 		public const string EditorLabel = "editor_label";
 		
 		public const string Readonly = "readonly";
 		
+		// String
 		public const string Multiline = "multiline";
+		
+		// DateTime
+		public const string DateOnly = "date_only";
 	}
 }

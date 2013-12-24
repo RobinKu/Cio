@@ -16,63 +16,18 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Windows;
+
 using Cio.UI;
 
-namespace TestApp
+namespace Cio.UI.Wpf.ElementFactories
 {
-	public class User
+	public abstract class WpfElementFactory : WpfElementFactory<FrameworkElement>
 	{
-		public User()
-		{
-			Profile = new UserProfile();
-		}
-		
-		[DisplayName("Naam")]
-		public string Name
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Wachtwoord")]
-		public string Password
-		{
-			get;
-			set;
-		}
-		
-		public string Signature
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
 	}
 	
-	public class UserProfile
+	public abstract class WpfElementFactory<T> : BaseElementFactory<T>
+		where T : FrameworkElement
 	{
-		public string Text
-		{
-			get;
-			set;
-		}
 	}
 }

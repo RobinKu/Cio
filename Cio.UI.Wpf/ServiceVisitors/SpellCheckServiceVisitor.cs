@@ -16,63 +16,29 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using Cio.UI;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Markup;
 
-namespace TestApp
+namespace Cio.UI.Wpf.ServiceVisitors
 {
-	public class User
+	public class SpellCheckServiceVisitor : DefaultSingleServiceVisitor<ISpellCheckService>
 	{
-		public User()
+		public SpellCheckServiceVisitor()
 		{
-			Profile = new UserProfile();
+			SetEditorElementType<TextBoxBase>();
 		}
 		
-		[DisplayName("Naam")]
-		public string Name
+		protected override void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, ISpellCheckService service)
 		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Wachtwoord")]
-		public string Password
-		{
-			get;
-			set;
-		}
-		
-		public string Signature
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
-	}
-	
-	public class UserProfile
-	{
-		public string Text
-		{
-			get;
-			set;
+			TextBoxBase tb = (TextBoxBase)editorElement;
+			
+			SpellCheck.SetIsEnabled(tb, true);
+			
+			if (!service.UseDefaultCulture)
+			{
+				tb.Language = XmlLanguage.GetLanguage(service.GetCulture().Name);
+			}
 		}
 	}
 }

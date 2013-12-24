@@ -16,63 +16,33 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using Cio.UI;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
-namespace TestApp
+namespace Cio.UI.Wpf.ElementFactories
 {
-	public class User
+	public class CheckBoxFactory : WpfElementFactory<CheckBox>
 	{
-		public User()
+		public override CheckBox CreateElement(string renderMode)
 		{
-			Profile = new UserProfile();
+			return new CheckBox();
 		}
 		
-		[DisplayName("Naam")]
-		public string Name
+		public override CheckBox CreateElement(object objectToRender, string rendermode)
 		{
-			get;
-			set;
+			CheckBox cb = this.CreateElement(rendermode);
+			cb.Content = objectToRender;
+			
+			return cb;
 		}
 		
-		[DisplayName("Wachtwoord")]
-		public string Password
+		public override CheckBox CreateElement(object source, string bindingPath, string rendermode)
 		{
-			get;
-			set;
-		}
-		
-		public string Signature
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
-	}
-	
-	public class UserProfile
-	{
-		public string Text
-		{
-			get;
-			set;
+			CheckBox cb = this.CreateElement(rendermode);
+			BindingUtility.AddBinding(cb, CheckBox.IsCheckedProperty, source, bindingPath);
+			
+			return cb;
 		}
 	}
 }

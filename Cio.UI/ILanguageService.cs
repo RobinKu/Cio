@@ -16,63 +16,12 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using Cio.UI;
+using System.Globalization;
 
-namespace TestApp
+namespace Cio.UI
 {
-	public class User
+	public interface ILanguageService
 	{
-		public User()
-		{
-			Profile = new UserProfile();
-		}
-		
-		[DisplayName("Naam")]
-		public string Name
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Wachtwoord")]
-		public string Password
-		{
-			get;
-			set;
-		}
-		
-		public string Signature
-		{
-			get;
-			set;
-		}
-		
-		[DisplayName("Actief")]
-		public bool IsActive
-		{
-			get;
-			set;
-		}
-		
-		public DateTime DateOfBirth
-		{
-			get;
-			set;
-		}
-		
-		public UserProfile Profile
-		{
-			get;
-			private set;
-		}
-	}
-	
-	public class UserProfile
-	{
-		public string Text
-		{
-			get;
-			set;
-		}
+		CultureInfo GetCulture();
 	}
 }
