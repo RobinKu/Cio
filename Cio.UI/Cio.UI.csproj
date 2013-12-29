@@ -58,8 +58,6 @@
     <Compile Include="BindingPathUtility.cs" />
     <Compile Include="CioConfiguration.cs" />
     <Compile Include="CioForm.cs" />
-    <Compile Include="CurrentThreadUILanguageService.cs" />
-    <Compile Include="CustomLanguageService.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />
     <Compile Include="DefaultSingleServiceVisitor.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
@@ -73,19 +71,16 @@
     <Compile Include="IElementFactory.cs" />
     <Compile Include="IElementResolver.cs" />
     <Compile Include="IFormBuilder.cs" />
-    <Compile Include="ILanguageService.cs" />
     <Compile Include="INeedElementResolver.cs" />
     <Compile Include="INestingDisplayNameService.cs" />
     <Compile Include="InvalidBindingPathException.cs" />
     <Compile Include="IServiceVisitor.cs" />
-    <Compile Include="ISpellCheckService.cs" />
     <Compile Include="ManualEditableService.cs" />
     <Compile Include="NestingDisplayNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyDisplayNameService.cs" />
     <Compile Include="RenderModes.cs" />
     <Compile Include="ResolveException.cs" />
-    <Compile Include="SpellCheckService.cs" />
     <Compile Include="StaticEditableService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿#define use_config_file
+﻿//#define use_config_file
 /*
  * Cio
  * Copyright (C) 2013 Robin Kuijstermans
@@ -67,7 +67,7 @@ namespace TestApp
 			
 			form.Add(u => u.Name);
 			form.Add(u => u.Password, RenderModes.Readonly);
-			form.Add(u => u.Signature, RenderModes.Multiline, new SpellCheckService());
+			form.Add(u => u.Signature, RenderModes.Multiline);
 			form.Add(u => u.IsActive);
 			form.Add(u => u.DateOfBirth, RenderModes.DateOnly);
 			form.Add(u => u.Profile.Text);
