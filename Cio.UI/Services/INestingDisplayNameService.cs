@@ -17,7 +17,7 @@
  */
 using System;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
 	public interface INestingDisplayNameService : IDisplayNameService
 	{

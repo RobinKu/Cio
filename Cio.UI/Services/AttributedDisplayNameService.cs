@@ -18,20 +18,33 @@
 using System;
 using System.Reflection;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	public class PropertyDisplayNameService : IDisplayNameService
+	public class AttributedDisplayNameService : NestingDisplayNameService
 	{
-		public string GetDisplayName(object source, string bindingPath)
+		public AttributedDisplayNameService(IDisplayNameService innerDisplayNameService)
+			: base(innerDisplayNameService)
 		{
-			if (source == null)
+		}
+		
+		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
+		{
+			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
+			
+			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
+			
+			bool hasAttribute = att != null;
+			
+			if (hasAttribute)
 			{
-				throw new ArgumentNullException("source");
+				displayName = att.Name;
+			}
+			else
+			{
+				displayName = null;
 			}
 			
-			PropertyInfo property = BindingPathUtility.GetProperty(source.GetType(), bindingPath);
-			
-			return property.Name;
+			return hasAttribute;
 		}
 	}
 }

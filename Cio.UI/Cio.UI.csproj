@@ -52,8 +52,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributedDisplayNameService.cs" />
-    <Compile Include="BaseEditableService.cs" />
     <Compile Include="BaseElementFactory.cs" />
     <Compile Include="BindingPathUtility.cs" />
     <Compile Include="CioConfiguration.cs" />
@@ -61,36 +59,41 @@
     <Compile Include="DefaultServiceVisitor.cs" />
     <Compile Include="DefaultSingleServiceVisitor.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
-    <Compile Include="EditableService.cs" />
     <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="ElementPairAddedEventArgs.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
     <Compile Include="FieldBindingInfo.cs" />
-    <Compile Include="IDisplayNameService.cs" />
-    <Compile Include="IEditableService.cs" />
     <Compile Include="IElementConfiguration.cs" />
     <Compile Include="IElementFactory.cs" />
     <Compile Include="IElementResolver.cs" />
     <Compile Include="IFormBuilder.cs" />
     <Compile Include="INeedElementResolver.cs" />
-    <Compile Include="INestingDisplayNameService.cs" />
     <Compile Include="InvalidBindingPathException.cs" />
     <Compile Include="IServiceRegistrable.cs" />
     <Compile Include="IServiceVisitor.cs" />
     <Compile Include="IServiceVisitorRegistrable.cs" />
-    <Compile Include="ManualEditableService.cs" />
-    <Compile Include="NestingDisplayNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyDisplayNameService.cs" />
     <Compile Include="RenderModes.cs" />
     <Compile Include="ResolveException.cs" />
-    <Compile Include="StaticEditableService.cs" />
+    <Compile Include="Services\AttributedDisplayNameService.cs" />
+    <Compile Include="Services\BaseEditableService.cs" />
+    <Compile Include="Services\EditableService.cs" />
+    <Compile Include="Services\IDisplayNameService.cs" />
+    <Compile Include="Services\IEditableService.cs" />
+    <Compile Include="Services\INestingDisplayNameService.cs" />
+    <Compile Include="Services\ManualEditableService.cs" />
+    <Compile Include="Services\NestingDisplayNameService.cs" />
+    <Compile Include="Services\PropertyDisplayNameService.cs" />
+    <Compile Include="Services\StaticEditableService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cio\Cio.csproj">
       <Project>{43470FCD-2D83-4B18-8472-EA9B64F0FAA5}</Project>
       <Name>Cio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

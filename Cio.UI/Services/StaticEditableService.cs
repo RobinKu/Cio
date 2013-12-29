@@ -16,12 +16,15 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	public interface IDisplayNameService
+	internal class StaticEditableService : BaseEditableService
 	{
-		string GetDisplayName(object source, string bindingPath);
+		internal StaticEditableService(bool editable, string reason = null)
+		{
+			this.Editable = editable;
+			this.DisabledReason = reason;
+		}
 	}
 }

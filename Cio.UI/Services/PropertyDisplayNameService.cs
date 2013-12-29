@@ -18,34 +18,20 @@
 using System;
 using System.Reflection;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	public abstract class NestingDisplayNameService : INestingDisplayNameService
+	public class PropertyDisplayNameService : IDisplayNameService
 	{
-		private IDisplayNameService innerDisplayNameService;
-		
-		protected NestingDisplayNameService(IDisplayNameService innerDisplayNameService)
-		{
-			this.innerDisplayNameService = innerDisplayNameService;
-		}
-		
-		public IDisplayNameService GetInnerDisplayNameService()
-		{
-			return this.innerDisplayNameService;
-		}
-		
 		public string GetDisplayName(object source, string bindingPath)
 		{
-			string displayName;
-			
-			if (!this.TryGetDisplayName(source, bindingPath, out displayName))
+			if (source == null)
 			{
-				displayName = this.innerDisplayNameService.GetDisplayName(source, bindingPath);
+				throw new ArgumentNullException("source");
 			}
 			
-			return displayName;
+			PropertyInfo property = BindingPathUtility.GetProperty(source.GetType(), bindingPath);
+			
+			return property.Name;
 		}
-		
-		protected abstract bool TryGetDisplayName(object source, string bindingPath, out string displayName);
 	}
 }

@@ -17,14 +17,24 @@
  */
 using System;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	internal class StaticEditableService : BaseEditableService
+	public static class EditableService
 	{
-		internal StaticEditableService(bool editable, string reason = null)
+		public static IEditableService AlwaysEditable
 		{
-			this.Editable = editable;
-			this.DisabledReason = reason;
+			get
+			{
+				return new StaticEditableService(true);
+			}
+		}
+		
+		public static IEditableService NeverEditable
+		{
+			get
+			{
+				return new StaticEditableService(false);
+			}
 		}
 	}
 }

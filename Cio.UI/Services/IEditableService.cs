@@ -16,25 +16,22 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.ComponentModel;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	public static class EditableService
+	public interface IEditableService : INotifyPropertyChanged
 	{
-		public static IEditableService AlwaysEditable
+		event EventHandler EditableChanged;
+		
+		bool Editable
 		{
-			get
-			{
-				return new StaticEditableService(true);
-			}
+			get;
 		}
 		
-		public static IEditableService NeverEditable
+		string DisabledReason
 		{
-			get
-			{
-				return new StaticEditableService(false);
-			}
+			get;
 		}
 	}
 }

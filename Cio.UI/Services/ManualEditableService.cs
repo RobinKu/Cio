@@ -16,22 +16,21 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.ComponentModel;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	public interface IEditableService : INotifyPropertyChanged
+	public class ManualEditableService : BaseEditableService
 	{
-		event EventHandler EditableChanged;
-		
-		bool Editable
+		public void EnableEditing()
 		{
-			get;
+			this.Editable = true;
+			this.DisabledReason = string.Empty;
 		}
 		
-		string DisabledReason
+		public void DisabledEditing(string reason)
 		{
-			get;
+			this.Editable = false;
+			this.DisabledReason = reason;
 		}
 	}
 }
