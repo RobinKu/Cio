@@ -55,7 +55,9 @@
     <Compile Include="BaseElementFactory.cs" />
     <Compile Include="BindingPathUtility.cs" />
     <Compile Include="CioConfiguration.cs" />
+    <Compile Include="CioDataGrid.cs" />
     <Compile Include="CioForm.cs" />
+    <Compile Include="ColumnAddedEventArgs.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />
     <Compile Include="DefaultSingleServiceVisitor.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="ElementPairAddedEventArgs.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
     <Compile Include="FieldBindingInfo.cs" />
+    <Compile Include="IDataGridBuilder.cs" />
     <Compile Include="IElementConfiguration.cs" />
     <Compile Include="IElementFactory.cs" />
     <Compile Include="IElementResolver.cs" />
