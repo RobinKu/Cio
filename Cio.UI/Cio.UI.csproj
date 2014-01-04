@@ -52,11 +52,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddedEventArgs.cs" />
+    <Compile Include="AddInformation.cs" />
     <Compile Include="BaseElementFactory.cs" />
     <Compile Include="BindingPathUtility.cs" />
     <Compile Include="CioConfiguration.cs" />
     <Compile Include="CioDataGrid.cs" />
     <Compile Include="CioForm.cs" />
+    <Compile Include="CioBlock.cs" />
     <Compile Include="ColumnAddedEventArgs.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />
     <Compile Include="DefaultSingleServiceVisitor.cs" />
@@ -65,6 +68,8 @@
     <Compile Include="ElementPairAddedEventArgs.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
     <Compile Include="FieldBindingInfo.cs" />
+    <Compile Include="IBindableBlockBuilder.cs" />
+    <Compile Include="IBlockBuilder.cs" />
     <Compile Include="IDataGridBuilder.cs" />
     <Compile Include="IElementConfiguration.cs" />
     <Compile Include="IElementFactory.cs" />

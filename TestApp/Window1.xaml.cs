@@ -1,4 +1,4 @@
-﻿#define use_config_file
+﻿//#define use_config_file
 /*
  * Cio
  * Copyright (C) 2013 Robin Kuijstermans

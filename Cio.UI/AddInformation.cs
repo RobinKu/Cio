@@ -19,10 +19,18 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IFormBuilder : IBlockBuilder
+	public class AddInformation
 	{
-		object Add(object form, object source, FieldBindingInfo bindingInfo);
+		public object AddTo
+		{
+			get;
+			set;
+		}
 		
-		object CreateForm();
+		public IEnumerable<object> Services
+		{
+			get;
+			set;
+		}
 	}
 }

@@ -19,10 +19,17 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IFormBuilder : IBlockBuilder
+	public class AddedEventArgs : EventArgs
 	{
-		object Add(object form, object source, FieldBindingInfo bindingInfo);
+		public AddedEventArgs(AddInformation info)
+		{
+			this.AddInformation = info;
+		}
 		
-		object CreateForm();
+		public AddInformation AddInformation
+		{
+			get;
+			private set;
+		}
 	}
 }
