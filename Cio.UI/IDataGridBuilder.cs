@@ -19,13 +19,7 @@ using System;
 
 namespace Cio.UI
 {
-	/// <summary>
-	/// Description of IDataGridBuilder.
-	/// </summary>
-	public class IDataGridBuilder
+	public interface IDataGridBuilder : IBindableBlockBuilder
 	{
-		public IDataGridBuilder()
-		{
-		}
 	}
 }

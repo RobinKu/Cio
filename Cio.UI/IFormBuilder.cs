@@ -19,10 +19,7 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IFormBuilder : IBlockBuilder
+	public interface IFormBuilder : IBindableBlockBuilder
 	{
-		object Add(object form, object source, FieldBindingInfo bindingInfo);
-		
-		object CreateForm();
 	}
 }

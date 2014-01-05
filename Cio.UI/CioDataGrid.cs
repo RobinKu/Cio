@@ -16,40 +16,27 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Collections.Generic;
 
 namespace Cio.UI
 {
-	public class CioDataGrid<T> : CioBlock<IDataGridBuilder>
+	public class CioDataGrid<T> : CioBindableBlock<IDataGridBuilder, IEnumerable<T>, T>
 	{
 		public CioDataGrid(CioConfiguration config, IDataGridBuilder gridBuilder)
 			: base(config, gridBuilder)
 		{
 		}
-
-		public void Add(string bindingPath, string rendermode = null, params object[] services)
+		
+		public CioDataGrid(CioConfiguration config, IDataGridBuilder gridBuilder, IEnumerable<T> collection)
+			: base(config, gridBuilder, collection)
 		{
-			FieldBindingInfo info = new FieldBindingInfo();
-			info.BindingPath = bindingPath;
-			info.Rendermode = rendermode;
-			info.Services = services;
-			
-			this.fieldInfos.Add(info);
 		}
 		
-		public void Add<TReturn>(Expression<Func<T, TReturn>> property, string rendermode = null, params object[] services)
+		protected override BasicBindingInformation CreateBindingInformation(string bindingPath, string rendermode, IEnumerable<object> services)
 		{
-			try
-			{
-				IEnumerable<string> propertyNames = PropertyUtil.GetPropertyNames(property);
-				
-				string bindingPath = string.Join(".", propertyNames.Reverse());
-				
-				this.Add(bindingPath, rendermode, services);
-			}
-			catch (InvalidPropertyExpressionException ex)
-			{
-				throw new InvalidBindingPathException("Binding paths may only consist of properties.", ex);
-			}
-		}
+			ColumnBindingInformation info = new ColumnBindingInformation();
+			
+			return info;
+		} 
 	}
 }

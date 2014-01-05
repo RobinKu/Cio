@@ -19,7 +19,7 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IBindableBlockBuilder : IBlockBuilder
+	public class ColumnBindingInformation : BasicBindingInformation
 	{
 	}
 }

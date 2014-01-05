@@ -24,9 +24,9 @@ namespace Cio.UI
 		private object labelElement;
 		private object editorElement;
 		private object source;
-		private FieldBindingInfo bindingInfo;
+		private BindingInformation bindingInfo;
 		
-		public ElementPairAddedEventArgs(object labelElement, object editorElement, object source, FieldBindingInfo bindingInfo)
+		public ElementPairAddedEventArgs(object labelElement, object editorElement, object source, BindingInformation bindingInfo)
 		{
 			this.labelElement = labelElement;
 			this.editorElement = editorElement;
@@ -58,7 +58,7 @@ namespace Cio.UI
 			}
 		}
 		
-		public FieldBindingInfo BindingInfo
+		public BindingInformation BindingInfo
 		{
 			get
 			{

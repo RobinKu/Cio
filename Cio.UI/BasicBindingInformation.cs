@@ -19,7 +19,18 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IBindableBlockBuilder : IBlockBuilder
+	public abstract class BasicBindingInformation : AddInformation
 	{
+		public string BindingPath
+		{
+			get;
+			set;
+		}
+		
+		public string RenderMode
+		{
+			get;
+			set;
+		}
 	}
 }
