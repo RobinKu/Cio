@@ -16,28 +16,23 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
 
 namespace Cio.UI
 {
-	public class FieldBindingInfo
+	public class NothingToBindException : CioException
 	{
-		public string BindingPath
+		public NothingToBindException()
 		{
-			get;
-			set;
 		}
 		
-		public string Rendermode
+		public NothingToBindException(string message)
+			: base(message)
 		{
-			get;
-			set;
 		}
 		
-		public IEnumerable<object> Services
+		public NothingToBindException(string message, Exception innerException)
+			: base(message, innerException)
 		{
-			get;
-			set;
 		}
 	}
 }

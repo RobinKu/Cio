@@ -25,7 +25,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-
 using Cio.UI;
 using Cio.UI.Composition.Default;
 using Cio.UI.Configuration;

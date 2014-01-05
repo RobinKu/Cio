@@ -63,6 +63,11 @@ namespace Cio.UI
 			}
 		}
 		
+		internal IEnumerable<AddInformation> GetAddInformation()
+		{
+			return this.items;
+		}
+		
 		public void Add(AddInformation info)
 		{
 			if (info == null)
@@ -73,7 +78,7 @@ namespace Cio.UI
 			this.items.Add(info);
 		}
 		
-		public void Render(object obj)
+		public virtual object Render()
 		{
 			object block = this.builder.CreateBlock();
 			
