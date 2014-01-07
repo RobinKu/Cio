@@ -38,9 +38,9 @@ namespace Cio.UI.Wpf
 			this.resolver = resolver;
 		}
 		
-		public event EventHandler<ElementPairAddedEventArgs> ElementPairAdded;
+		public event EventHandler<AddedEventArgs> Added;
 
-		public object CreateForm()
+		public object CreateBlock()
 		{
 			ItemsControl panel = new ItemsControl();
 			
@@ -50,26 +50,44 @@ namespace Cio.UI.Wpf
             return panel;
 		}
 		
-		public object Add(object form, object source, FieldBindingInfo bindingInfo)
+		public object Add(AddInformation info)
 		{
-			if (form == null)
+			if (info == null)
 			{
-				throw new ArgumentNullException("form");
-			}
-			else if (bindingInfo == null)
-			{
-				throw new ArgumentNullException("bindingInfo");
+				throw new ArgumentNullException("info");
 			}
 			
-			ItemsControl panel = form as ItemsControl;
+			BindingInformation bInfo;
+			
+			try
+			{
+				bInfo = (BindingInformation)info;
+			}
+			catch (InvalidCastException ex)
+			{
+				throw new ArgumentException("This BlockBuilder can only process info of type BindingInformation.", ex);
+			}
+			
+			return this.Add(bInfo);
+		}
+		
+		public object Add(BindingInformation info)
+		{
+			if (info == null)
+			{
+				throw new ArgumentNullException("info");
+			}
+			
+			ItemsControl panel = info.AddTo as ItemsControl;
 			
 			if (panel == null)
 			{
-				throw new ArgumentException("form must derive from ItemsControl. Use the CreateForm() method of the formbuilder to create the right type.");
+				throw new ArgumentException("form must derive from ItemsControl. Use the CreateBlock() method of the formbuilder to create the right type.");
 			}
 			
-			string bindingPath = bindingInfo.BindingPath;
-			string rendermode = bindingInfo.Rendermode;
+			object source = info.Source;
+			string bindingPath = info.BindingPath;
+			string rendermode = info.RenderMode;
 			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
 			
 			IElementFactory labelFactory = this.resolver.Resolve<string>(RenderModes.EditorLabel);
@@ -81,18 +99,19 @@ namespace Cio.UI.Wpf
 			panel.Items.Add(labelElement);
 			panel.Items.Add(editorElement);
 			
-			OnElementPairAdded(labelElement, editorElement, source, bindingInfo);
+			FormResult result = new FormResult(labelElement, editorElement);
+			OnAdded(info, result);
 			
 			return editorElement;
 		}
 		
-		private void OnElementPairAdded(object labelElement, object editorElement, object source, FieldBindingInfo bindingInfo)
+		private void OnAdded(AddInformation info, IResult result)
 		{
-			EventHandler<ElementPairAddedEventArgs> handler = ElementPairAdded;
+			EventHandler<AddedEventArgs> handler = Added;
 			
 			if (handler != null)
 			{
-				ElementPairAddedEventArgs ev = new ElementPairAddedEventArgs(labelElement, editorElement, source, bindingInfo);
+				AddedEventArgs ev = new AddedEventArgs(info, result);
 				
 				handler(this, ev);
 			}

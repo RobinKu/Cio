@@ -65,12 +65,14 @@
     <Compile Include="CioBlock.cs" />
     <Compile Include="ColumnAddedEventArgs.cs" />
     <Compile Include="ColumnBindingInformation.cs" />
+    <Compile Include="DefaultFormServiceVisitor.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />
-    <Compile Include="DefaultSingleServiceVisitor.cs" />
+    <Compile Include="DefaultSingleFormServiceVisitor.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
     <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="ElementPairAddedEventArgs.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
+    <Compile Include="FormResult.cs" />
     <Compile Include="IBindableBlockBuilder.cs" />
     <Compile Include="IBlockBuilder.cs" />
     <Compile Include="IDataGridBuilder.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="IFormBuilder.cs" />
     <Compile Include="INeedElementResolver.cs" />
     <Compile Include="InvalidBindingPathException.cs" />
+    <Compile Include="IResult.cs" />
     <Compile Include="IServiceRegistrable.cs" />
     <Compile Include="IServiceVisitor.cs" />
     <Compile Include="IServiceVisitorRegistrable.cs" />

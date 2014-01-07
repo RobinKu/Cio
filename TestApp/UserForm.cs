@@ -16,18 +16,20 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Cio.UI;
 
-namespace Cio.UI
+namespace TestApp
 {
-	public abstract class DefaultSingleServiceVisitor<T> : DefaultServiceVisitor<T>
+	public class UserForm : CioForm<User>
 	{
-		protected sealed override void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEnumerable<T> services)
+		public UserForm(CioConfiguration config, IFormBuilder formBuilder)
+			: base(config, formBuilder)
 		{
-			Visit(labelElement, editorElement, source, bindingPath, renderMode, services.First());
+			Add(u => u.Name);
+			Add(u => u.Password, RenderModes.Readonly);
+			Add(u => u.Signature, RenderModes.Multiline);
+			Add(u => u.IsActive);
+			Add(u => u.Profile.Text);
 		}
-		
-		protected abstract void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, T service);
 	}
 }

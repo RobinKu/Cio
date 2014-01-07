@@ -16,27 +16,23 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cio.UI
 {
-	public class AddedEventArgs : EventArgs
+	public abstract class DefaultSingleFormServiceVisitor : DefaultFormServiceVisitor
 	{
-		public AddedEventArgs(AddInformation info, IResult result)
+		protected sealed override void VisitInternal(BindingInformation info, FormResult result, IEnumerable<object> services)
 		{
-			this.AddInformation = info;
-			this.Result = result;
+			object service = services.FirstOrDefault();
+			
+			if (service != null)
+			{
+				this.VisitInternal(info, result, service);
+			}
 		}
 		
-		public AddInformation AddInformation
-		{
-			get;
-			private set;
-		}
-		
-		public IResult Result
-		{
-			get;
-			private set;
-		}
+		protected abstract void VisitInternal(BindingInformation info, FormResult result, object service);
 	}
 }

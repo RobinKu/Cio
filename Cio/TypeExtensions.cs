@@ -17,26 +17,22 @@
  */
 using System;
 
-namespace Cio.UI
+namespace Cio
 {
-	public class AddedEventArgs : EventArgs
+	public static class TypeExtensions
 	{
-		public AddedEventArgs(AddInformation info, IResult result)
+		public static bool IsEqualOrDerivedFrom(this Type type, Type baseType)
 		{
-			this.AddInformation = info;
-			this.Result = result;
-		}
-		
-		public AddInformation AddInformation
-		{
-			get;
-			private set;
-		}
-		
-		public IResult Result
-		{
-			get;
-			private set;
+			if (type == null)
+			{
+				throw new ArgumentNullException("type");
+			}
+			else if (baseType == null)
+			{
+				throw new ArgumentNullException("baseType");
+			}
+			
+			return baseType.IsAssignableFrom(type);
 		}
 	}
 }

@@ -23,20 +23,24 @@ using System.Windows.Data;
 
 using Cio.Reflection;
 using Cio.UI;
+using Cio.UI.Services;
 using Cio.UI.Wpf.Converters;
 
 namespace Cio.UI.Wpf.ServiceVisitors
 {
-	public class EditableServiceVisitor : DefaultSingleServiceVisitor<IEditableService>
+	public class EditableServiceVisitor : DefaultSingleFormServiceVisitor
 	{
 		public EditableServiceVisitor()
 		{
+			SetServiceType<IEditableService>();
 			SetEditorElementType<FrameworkElement>();
 		}
 		
-		protected override void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEditableService service)
+		protected override void VisitInternal(BindingInformation info, FormResult result, object service)
 		{
-			FrameworkElement element = (FrameworkElement)editorElement;
+			IEditableService typedService = (IEditableService)service;
+			
+			FrameworkElement element = (FrameworkElement)result.EditorElement;
 			
 			string editablePropertyName = PropertyUtil<IEditableService>.GetPropertyName(s => s.Editable);
 			string reasonPropertyName = PropertyUtil<IEditableService>.GetPropertyName(s => s.DisabledReason);

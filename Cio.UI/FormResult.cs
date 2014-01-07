@@ -19,21 +19,21 @@ using System;
 
 namespace Cio.UI
 {
-	public class AddedEventArgs : EventArgs
+	public class FormResult : IResult
 	{
-		public AddedEventArgs(AddInformation info, IResult result)
+		public FormResult(object labelElement, object editorElement)
 		{
-			this.AddInformation = info;
-			this.Result = result;
+			this.LabelElement = labelElement;
+			this.EditorElement = editorElement;
 		}
 		
-		public AddInformation AddInformation
+		public object LabelElement
 		{
 			get;
 			private set;
 		}
 		
-		public IResult Result
+		public object EditorElement
 		{
 			get;
 			private set;

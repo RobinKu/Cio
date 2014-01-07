@@ -98,21 +98,21 @@ namespace Cio.UI
 			this.bindableObject = obj;
 		}
 		
-		public override void Render()
+		public override object Render()
 		{
 			if (this.bindableObject == null)
 			{
 				throw new NothingToBindException("No object was given to bind to.");
 			}
 			
-			base.Render();
+			return base.Render();
 		}
 		
-		public void Render(TBindableObject obj)
+		public object Render(TBindableObject obj)
 		{
 			this.SetBindableObject(obj);
 			
-			this.Render();
+			return this.Render();
 		}
 	}
 }

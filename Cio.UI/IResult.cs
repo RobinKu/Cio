@@ -19,24 +19,7 @@ using System;
 
 namespace Cio.UI
 {
-	public class AddedEventArgs : EventArgs
+	public interface IResult
 	{
-		public AddedEventArgs(AddInformation info, IResult result)
-		{
-			this.AddInformation = info;
-			this.Result = result;
-		}
-		
-		public AddInformation AddInformation
-		{
-			get;
-			private set;
-		}
-		
-		public IResult Result
-		{
-			get;
-			private set;
-		}
 	}
 }

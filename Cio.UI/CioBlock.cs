@@ -84,6 +84,8 @@ namespace Cio.UI
 			
 			foreach (AddInformation info in this.items)
 			{
+				info.AddTo = block;
+				
 				this.builder.Add(info);
 			}
 			
@@ -101,7 +103,7 @@ namespace Cio.UI
 			{
 				foreach (IServiceVisitor visitor in ServiceVisitors)
 				{
-					visitor.Visit(info, allServices);
+					visitor.Visit(info, ev.Result, allServices);
 				}
 			}
 		}
