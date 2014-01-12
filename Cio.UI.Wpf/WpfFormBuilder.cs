@@ -78,23 +78,18 @@ namespace Cio.UI.Wpf
 				throw new ArgumentNullException("info");
 			}
 			
-			ItemsControl panel = info.AddTo as ItemsControl;
+			ItemsControl panel = ValidateBlockAsItemsControl(info.AddTo);
 			
-			if (panel == null)
-			{
-				throw new ArgumentException("form must derive from ItemsControl. Use the CreateBlock() method of the formbuilder to create the right type.");
-			}
-			
-			object source = info.Source;
+			Type sourceType = info.SourceType;
 			string bindingPath = info.BindingPath;
 			string rendermode = info.RenderMode;
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
+			PropertyInfo property = BindingPathUtility.GetProperty(sourceType, bindingPath);
 			
 			IElementFactory labelFactory = this.resolver.Resolve<string>(RenderModes.EditorLabel);
 			object labelElement = labelFactory.CreateElement(RenderModes.EditorLabel);
 			
 			IElementFactory editorFactory = this.resolver.Resolve(property.PropertyType, rendermode);
-			object editorElement = editorFactory.CreateElement(source, bindingPath, rendermode);
+			object editorElement = editorFactory.CreateElement(sourceType, bindingPath, rendermode);
 			
 			panel.Items.Add(labelElement);
 			panel.Items.Add(editorElement);
@@ -115,6 +110,30 @@ namespace Cio.UI.Wpf
 				
 				handler(this, ev);
 			}
+		}
+		
+		public void Bind(object block, object bindableOBject)
+		{
+			if (block == null)
+			{
+				throw new ArgumentNullException("block");
+			}
+			
+			ItemsControl panel = ValidateBlockAsItemsControl(block);
+			
+			panel.DataContext = bindableOBject;
+		}
+		
+		private ItemsControl ValidateBlockAsItemsControl(object block)
+		{
+			ItemsControl panel = block as ItemsControl;
+			
+			if (panel == null)
+			{
+				throw new ArgumentException("form must derive from ItemsControl. Use the CreateBlock() method of the formbuilder to create the right type.");
+			}
+			
+			return panel;
 		}
 	}
 }

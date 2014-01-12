@@ -47,6 +47,14 @@ namespace Cio.UI
 			this.builder.Added += new EventHandler<AddedEventArgs>(ExecuteServiceVisitorsAfterAdd);
 		}
 		
+		protected TBuilder Builder
+		{
+			get
+			{
+				return this.builder;
+			}
+		}
+		
 		private IEnumerable<object> GeneralServices
 		{
 			get

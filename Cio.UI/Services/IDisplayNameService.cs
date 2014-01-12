@@ -22,6 +22,6 @@ namespace Cio.UI.Services
 {
 	public interface IDisplayNameService
 	{
-		string GetDisplayName(object source, string bindingPath);
+		string GetDisplayName(Type sourceType, string bindingPath);
 	}
 }

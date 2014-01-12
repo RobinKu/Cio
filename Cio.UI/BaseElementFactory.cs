@@ -25,7 +25,7 @@ namespace Cio.UI
 		
 		public abstract TElementBase CreateElement(object objectToRender, string rendermode);
 		
-		public abstract TElementBase CreateElement(object source, string bindingPath, string rendermode);
+		public abstract TElementBase CreateElement(Type sourceType, string bindingPath, string rendermode);
 		
 		object IElementFactory.CreateElement(string renderMode)
 		{
@@ -37,9 +37,9 @@ namespace Cio.UI
 			return this.CreateElement(objectToRender, rendermode);
 		}
 		
-		object IElementFactory.CreateElement(object source, string bindingPath, string rendermode)
+		object IElementFactory.CreateElement(Type sourceType, string bindingPath, string rendermode)
 		{
-			return this.CreateElement(source, bindingPath, rendermode);
+			return this.CreateElement(sourceType, bindingPath, rendermode);
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace Cio.UI
 		
 		object CreateElement(object objectToRender, string rendermode);
 		
-		object CreateElement(object source, string bindingPath, string rendermode);
+		object CreateElement(Type sourceType, string bindingPath, string rendermode);
 	}
 	
 	public interface IElementFactory<TElementBase> : IElementFactory
@@ -34,6 +34,6 @@ namespace Cio.UI
 		
 		new TElementBase CreateElement(object objectToRender, string rendermode);
 		
-		new TElementBase CreateElement(object source, string bindingPath, string rendermode);
+		new TElementBase CreateElement(Type sourceType, string bindingPath, string rendermode);
 	}
 }

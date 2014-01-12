@@ -27,9 +27,9 @@ namespace Cio.UI.Services
 		{
 		}
 		
-		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
+		protected override bool TryGetDisplayName(Type sourceType, string bindingPath, out string displayName)
 		{
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
+			PropertyInfo property = BindingPathUtility.GetProperty(sourceType, bindingPath);
 			
 			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
 			

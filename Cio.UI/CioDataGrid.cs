@@ -27,11 +27,6 @@ namespace Cio.UI
 		{
 		}
 		
-		public CioDataGrid(CioConfiguration config, IDataGridBuilder gridBuilder, IEnumerable<T> collection)
-			: base(config, gridBuilder, collection)
-		{
-		}
-		
 		protected override BasicBindingInformation CreateBindingInformation(string bindingPath, string rendermode, IEnumerable<object> services)
 		{
 			ColumnBindingInformation info = new ColumnBindingInformation();

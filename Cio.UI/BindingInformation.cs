@@ -21,6 +21,12 @@ namespace Cio.UI
 {
 	public class BindingInformation : BasicBindingInformation
 	{
+		public Type SourceType
+		{
+			get;
+			set;
+		}
+		
 		public object Source
 		{
 			get;

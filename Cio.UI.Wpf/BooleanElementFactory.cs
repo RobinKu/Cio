@@ -37,10 +37,9 @@ namespace Cio.UI.Wpf
 			return cb;
 		}
 		
-		public override FrameworkElement CreateElement(object source, string bindingPath, string rendermode)
+		public override FrameworkElement CreateElement(Type sourceType, string bindingPath, string rendermode)
 		{
 			Binding binding = new Binding(bindingPath);
-			binding.Source = source;
 			
 			FrameworkElement cb = (FrameworkElement)CreateElement(rendermode);
 			cb.SetBinding(CheckBox.IsCheckedProperty, binding);

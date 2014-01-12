@@ -22,14 +22,14 @@ namespace Cio.UI.Services
 {
 	public class PropertyDisplayNameService : IDisplayNameService
 	{
-		public string GetDisplayName(object source, string bindingPath)
+		public string GetDisplayName(Type sourceType, string bindingPath)
 		{
-			if (source == null)
+			if (sourceType == null)
 			{
-				throw new ArgumentNullException("source");
+				throw new ArgumentNullException("sourceType");
 			}
 			
-			PropertyInfo property = BindingPathUtility.GetProperty(source.GetType(), bindingPath);
+			PropertyInfo property = BindingPathUtility.GetProperty(sourceType, bindingPath);
 			
 			return property.Name;
 		}

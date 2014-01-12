@@ -63,7 +63,6 @@
     <Compile Include="CioDataGrid.cs" />
     <Compile Include="CioForm.cs" />
     <Compile Include="CioBlock.cs" />
-    <Compile Include="ColumnAddedEventArgs.cs" />
     <Compile Include="ColumnBindingInformation.cs" />
     <Compile Include="DefaultFormServiceVisitor.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />

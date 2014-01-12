@@ -21,5 +21,6 @@ namespace Cio.UI
 {
 	public interface IBindableBlockBuilder : IBlockBuilder
 	{
+		void Bind(object block, object bindableOBject);
 	}
 }

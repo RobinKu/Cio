@@ -26,30 +26,9 @@ namespace Cio.UI
 	public abstract class CioBindableBlock<TBuilder, TBindableObject, TBindingBase> : CioBlock<TBuilder>
 		where TBuilder : IBindableBlockBuilder
 	{
-		private TBindableObject bindableObject;
-		
 		public CioBindableBlock(CioConfiguration config, TBuilder builder)
 			: base(config, builder)
 		{
-		}
-		
-		public CioBindableBlock(CioConfiguration config, TBuilder builder, TBindableObject obj)
-			: this(config, builder)
-		{
-			if (obj == null)
-			{
-				throw new ArgumentNullException("obj");
-			}
-			
-			this.bindableObject = obj;
-		}
-		
-		protected object BindableObject
-		{
-			get
-			{
-				return this.bindableObject;
-			}
 		}
 		
 		protected abstract BasicBindingInformation CreateBindingInformation(string bindingPath, string rendermode, IEnumerable<object> services);
@@ -80,39 +59,18 @@ namespace Cio.UI
 			}
 		}
 		
-		public void SetBindableObject(TBindableObject obj)
-		{
-			if (obj == null)
-			{
-				throw new ArgumentNullException("obj");
-			}
-			
-			IEnumerable<BindingInformation> infos = this.GetAddInformation()
-				.OfType<BindingInformation>();
-			
-			foreach (BindingInformation info in infos)
-			{
-				info.Source = obj;
-			}
-			
-			this.bindableObject = obj;
-		}
-		
-		public override object Render()
-		{
-			if (this.bindableObject == null)
-			{
-				throw new NothingToBindException("No object was given to bind to.");
-			}
-			
-			return base.Render();
-		}
-		
 		public object Render(TBindableObject obj)
 		{
-			this.SetBindableObject(obj);
+			object block = this.Render();
 			
-			return this.Render();
+			this.Builder.Bind(block, obj);
+			
+			return block;
+		}
+		
+		public void Rebind(object block, TBindableObject obj)
+		{
+			this.Builder.Bind(block, obj);
 		}
 	}
 }

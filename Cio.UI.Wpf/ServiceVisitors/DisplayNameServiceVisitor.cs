@@ -35,7 +35,7 @@ namespace Cio.UI.Wpf.ServiceVisitors
 			
 			TextBlock tb = (TextBlock)result.LabelElement;
 			
-			tb.Text = typedService.GetDisplayName(info.Source, info.BindingPath);
+			tb.Text = typedService.GetDisplayName(info.SourceType, info.BindingPath);
 		}
 	}
 }

@@ -31,15 +31,10 @@ namespace Cio.UI
 		{
 		}
 		
-		public CioForm(CioConfiguration config, IFormBuilder formBuilder, T objectToRender)
-			: base(config, formBuilder, objectToRender)
-		{
-		}
-		
 		protected override BasicBindingInformation CreateBindingInformation(string bindingPath, string rendermode, IEnumerable<object> services)
 		{
 			BindingInformation info = new BindingInformation();
-			info.Source = this.BindableObject;
+			info.SourceType = typeof(T);
 			
 			return info;
 		}
