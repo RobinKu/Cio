@@ -35,12 +35,12 @@ namespace Cio.UI.Composition.Default
 			this.configuration = configuration;
 		}
 		
-		public IElementFactory Resolve(Type type)
+		public IElementFactory ResolveEditor(Type type)
 		{
-			return Resolve(type, null);
+			return ResolveEditor(type, null);
 		}
 		
-		public IElementFactory Resolve(Type type, string rendermode)
+		public IElementFactory ResolveEditor(Type type, string rendermode)
 		{
 			Type factoryType;
 			

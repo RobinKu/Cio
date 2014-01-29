@@ -58,6 +58,7 @@
     <Compile Include="AddInformation.cs" />
     <Compile Include="BaseElementFactory.cs" />
     <Compile Include="BindingPathUtility.cs" />
+    <Compile Include="BlockBuilder.cs" />
     <Compile Include="CioBindableBlock.cs" />
     <Compile Include="CioConfiguration.cs" />
     <Compile Include="CioDataGrid.cs" />
@@ -71,9 +72,12 @@
     <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="ElementPairAddedEventArgs.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
+    <Compile Include="FormBuilder.cs" />
     <Compile Include="FormResult.cs" />
     <Compile Include="IBindableBlockBuilder.cs" />
     <Compile Include="IBlockBuilder.cs" />
+    <Compile Include="IColumnElementFactory.cs" />
+    <Compile Include="IColumnElementResolver.cs" />
     <Compile Include="IDataGridBuilder.cs" />
     <Compile Include="IElementConfiguration.cs" />
     <Compile Include="IElementFactory.cs" />
@@ -85,6 +89,7 @@
     <Compile Include="IServiceRegistrable.cs" />
     <Compile Include="IServiceVisitor.cs" />
     <Compile Include="IServiceVisitorRegistrable.cs" />
+    <Compile Include="MissingInformationHandlerException.cs" />
     <Compile Include="NothingToBindException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderModes.cs" />
@@ -106,8 +111,6 @@
       <Name>Cio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

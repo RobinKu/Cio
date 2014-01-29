@@ -19,12 +19,10 @@ using System;
 
 namespace Cio.UI
 {
-	public interface IBlockBuilder
-	{
-		event EventHandler<AddedEventArgs> Added;
-		
-		IResult Add(AddInformation info);
-		
-		object CreateBlock();
-	}
+    public interface IColumnElementResolver
+    {
+        IColumnElementFactory ResolveColumn(Type type);
+
+        IColumnElementFactory ResolveColumn(Type type, string rendermode);
+    }
 }

@@ -22,24 +22,24 @@ namespace Cio.UI
 {
 	public static class ElementResolverExtensions
 	{
-		public static IElementFactory Resolve<T>(this IElementResolver resolver)
+		public static IElementFactory ResolveEditor<T>(this IElementResolver resolver)
 		{
 			if (resolver == null)
 			{
 				throw new ArgumentNullException("resolver");
 			}
 			
-			return resolver.Resolve(typeof(T));
+			return resolver.ResolveEditor(typeof(T));
 		}
 		
-		public static IElementFactory Resolve<T>(this IElementResolver resolver, string rendermode)
+		public static IElementFactory ResolveEditor<T>(this IElementResolver resolver, string rendermode)
 		{
 			if (resolver == null)
 			{
 				throw new ArgumentNullException("resolver");
 			}
 			
-			return resolver.Resolve(typeof(T), rendermode);
+			return resolver.ResolveEditor(typeof(T), rendermode);
 		}
 	}
 }
