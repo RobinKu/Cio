@@ -69,6 +69,7 @@
     <Compile Include="BooleanElementFactory.cs" />
     <Compile Include="ColumnWrapPanel.cs" />
     <Compile Include="Converters\CustomBooleanToVisibilityConverter.cs" />
+    <Compile Include="WpfDataGridBuilder.cs" />
     <Compile Include="ElementConfigurationExtensions.cs" />
     <Compile Include="ServiceVisitors\DisplayNameServiceVisitor.cs" />
     <Compile Include="ServiceVisitors\EditableServiceVisitor.cs" />
@@ -90,9 +91,6 @@
       <Name>Cio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters" />
-    <Folder Include="ServiceVisitors" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

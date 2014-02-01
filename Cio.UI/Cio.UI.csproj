@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicBindingInformation.cs" />
+    <Compile Include="BindableBlockBuilder.cs" />
     <Compile Include="BindingInformation.cs" />
     <Compile Include="AddedEventArgs.cs" />
     <Compile Include="AddInformation.cs" />
@@ -65,6 +66,8 @@
     <Compile Include="CioForm.cs" />
     <Compile Include="CioBlock.cs" />
     <Compile Include="ColumnBindingInformation.cs" />
+    <Compile Include="ColumnResult.cs" />
+    <Compile Include="DataGridBuilder.cs" />
     <Compile Include="DefaultFormServiceVisitor.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />
     <Compile Include="DefaultSingleFormServiceVisitor.cs" />

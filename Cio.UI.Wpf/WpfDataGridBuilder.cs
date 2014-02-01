@@ -24,31 +24,27 @@ using System.Windows.Controls;
 
 namespace Cio.UI.Wpf
 {
-    public class WpfFormBuilder : FormBuilder
+    public class WpfDataGridBuilder : DataGridBuilder
     {
-        public WpfFormBuilder(IElementResolver resolver)
+        public WpfDataGridBuilder(IColumnElementResolver resolver)
             : base(resolver)
         {
         }
 
         public override object CreateBlock()
         {
-            ItemsControl panel = new ItemsControl();
+            DataGrid grid = new DataGrid();
 
-            FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(ColumnWrapPanel));
-            panel.ItemsPanel = new ItemsPanelTemplate(frameworkElementFactory);
-
-            return panel;
+            return grid;
         }
 
         public override IResult Add(BindingInformation info)
         {
-            ItemsControl panel = this.ValidateAsBaseClass<ItemsControl>(info.AddTo);
+            DataGrid grid = this.ValidateAsBaseClass<DataGrid>(info.AddTo);
 
-            FormResult result = this.CreateBindingResult(info);
+            ColumnResult result = this.CreateColumnResult(info);
 
-            panel.Items.Add(result.LabelElement);
-            panel.Items.Add(result.EditorElement);
+            grid.Columns.Add((DataGridColumn)result.ColumnElement);
 
             OnAdded(info, result);
 
@@ -62,9 +58,9 @@ namespace Cio.UI.Wpf
                 throw new ArgumentNullException("block");
             }
 
-            ItemsControl panel = ValidateAsBaseClass<ItemsControl>(block);
+            DataGrid grid = ValidateAsBaseClass<DataGrid>(block);
 
-            panel.DataContext = bindableOBject;
+            grid.DataContext = bindableOBject;
         }
     }
 }

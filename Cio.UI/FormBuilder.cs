@@ -20,7 +20,7 @@ using System.Reflection;
 
 namespace Cio.UI
 {
-    public abstract class FormBuilder : BlockBuilder, IFormBuilder
+    public abstract class FormBuilder : BindableBlockBuilder, IFormBuilder
     {
         private readonly IElementResolver resolver;
 
@@ -42,28 +42,7 @@ namespace Cio.UI
             }
         }
 
-        public override IResult Add(AddInformation info)
-        {
-            if (info == null)
-            {
-                throw new ArgumentNullException("info");
-            }
-
-            BindingInformation bInfo = info as BindingInformation;
-
-            if (bInfo != null)
-            {
-                return Add(bInfo);
-            }
-            else
-            {
-                throw new MissingInformationHandlerException(string.Format("This builder cannot handle info of type {0}.", info.GetType()));
-            }
-        }
-
-        public abstract IResult Add(BindingInformation info);
-
-        protected FormResult AddInternal(BindingInformation info)
+        protected FormResult CreateBindingResult(BindingInformation info)
         {
             Type sourceType = info.SourceType;
             string bindingPath = info.BindingPath;
@@ -74,8 +53,6 @@ namespace Cio.UI
 
             return new FormResult(labelElement, editorElement);
         }
-
-        public abstract void Bind(object block, object bindableOBject);
 
         protected object CreateLabel()
         {
