@@ -22,6 +22,6 @@ namespace Cio.UI
 {
 	public interface IServiceVisitor
 	{
-		void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEnumerable<object> specificServices);
+		void Visit(AddInformation info, IResult result, IEnumerable<object> services);
 	}
 }

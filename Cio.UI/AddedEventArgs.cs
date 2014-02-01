@@ -16,22 +16,27 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
 
 namespace Cio.UI
 {
-	public class PropertyDisplayNameService : IDisplayNameService
+	public class AddedEventArgs : EventArgs
 	{
-		public string GetDisplayName(object source, string bindingPath)
+		public AddedEventArgs(AddInformation info, IResult result)
 		{
-			if (source == null)
-			{
-				throw new ArgumentNullException("source");
-			}
-			
-			PropertyInfo property = BindingPathUtility.GetProperty(source.GetType(), bindingPath);
-			
-			return property.Name;
+			this.AddInformation = info;
+			this.Result = result;
+		}
+		
+		public AddInformation AddInformation
+		{
+			get;
+			private set;
+		}
+		
+		public IResult Result
+		{
+			get;
+			private set;
 		}
 	}
 }

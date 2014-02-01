@@ -19,12 +19,10 @@ using System;
 
 namespace Cio.UI
 {
-	internal class StaticEditableService : BaseEditableService
+	public interface IColumnElementFactory
 	{
-		internal StaticEditableService(bool editable, string reason = null)
-		{
-			this.Editable = editable;
-			this.DisabledReason = reason;
-		}
+		object CreateColumn(string renderMode);
+		
+		object CreateColumn(Type sourceType, string bindingPath, string rendermode);
 	}
 }

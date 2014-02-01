@@ -30,6 +30,7 @@ using System.Windows.Media;
 using Cio.UI;
 using Cio.UI.Composition.Default;
 using Cio.UI.Configuration;
+using Cio.UI.Services;
 using Cio.UI.Wpf;
 using Cio.UI.Wpf.ServiceVisitors;
 
@@ -61,8 +62,9 @@ namespace TestApp
 			
 			IElementResolver resolver = config.Elements.CreateResolver();
 			
-			IFormBuilder formBuilder = new WpfFormBuilder(config, resolver);
+			IFormBuilder formBuilder = new WpfFormBuilder(resolver);
 			
+<<<<<<< HEAD
 			CioForm<User> form = new CioForm<User>(formBuilder);
 			
 			form.Add(u => u.Name);
@@ -71,10 +73,13 @@ namespace TestApp
 			form.Add(u => u.IsActive);
 			form.Add(u => u.DateOfBirth, RenderModes.DateOnly);
 			form.Add(u => u.Profile.Text);
+=======
+			var form = new UserForm(config, formBuilder);
+>>>>>>> origin/grid
 			
 			User user = CreateUser();
 			
-			grid.Children.Add((UIElement)form.RenderForm(user));
+			grid.Children.Add((UIElement)form.Render(user));
 		}
 		
 		private User CreateUser()

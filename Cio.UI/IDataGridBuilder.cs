@@ -16,27 +16,10 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Cio.Reflection;
 
 namespace Cio.UI
 {
-	public class CioForm<T> : CioBindableBlock<IFormBuilder, T, T>
+	public interface IDataGridBuilder : IBindableBlockBuilder
 	{
-		public CioForm(CioConfiguration config, IFormBuilder formBuilder)
-			: base (config, formBuilder)
-		{
-		}
-		
-		protected override BasicBindingInformation CreateBindingInformation(string bindingPath, string rendermode, IEnumerable<object> services)
-		{
-			BindingInformation info = new BindingInformation();
-			info.SourceType = typeof(T);
-			
-			return info;
-		}
 	}
 }

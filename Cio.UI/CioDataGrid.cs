@@ -17,26 +17,21 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Cio.Reflection;
 
 namespace Cio.UI
 {
-	public class CioForm<T> : CioBindableBlock<IFormBuilder, T, T>
+	public class CioDataGrid<T> : CioBindableBlock<IDataGridBuilder, IEnumerable<T>, T>
 	{
-		public CioForm(CioConfiguration config, IFormBuilder formBuilder)
-			: base (config, formBuilder)
+		public CioDataGrid(CioConfiguration config, IDataGridBuilder gridBuilder)
+			: base(config, gridBuilder)
 		{
 		}
 		
 		protected override BasicBindingInformation CreateBindingInformation(string bindingPath, string rendermode, IEnumerable<object> services)
 		{
-			BindingInformation info = new BindingInformation();
-			info.SourceType = typeof(T);
+			ColumnBindingInformation info = new ColumnBindingInformation();
 			
 			return info;
-		}
+		} 
 	}
 }

@@ -19,27 +19,51 @@ using System;
 
 namespace Cio.UI
 {
-	public abstract class BaseElementFactory<TElementBase> : IElementFactory<TElementBase>
+	public class ElementPairAddedEventArgs : EventArgs
 	{
-		public abstract TElementBase CreateElement(string renderMode);
+		private object labelElement;
+		private object editorElement;
+		private object source;
+		private BindingInformation bindingInfo;
 		
-		public abstract TElementBase CreateElement(object objectToRender, string rendermode);
-		
-		public abstract TElementBase CreateElement(Type sourceType, string bindingPath, string rendermode);
-		
-		object IElementFactory.CreateElement(string renderMode)
+		public ElementPairAddedEventArgs(object labelElement, object editorElement, object source, BindingInformation bindingInfo)
 		{
-			return this.CreateElement(renderMode);
+			this.labelElement = labelElement;
+			this.editorElement = editorElement;
+			this.source = source;
+			this.bindingInfo = bindingInfo;
 		}
 		
-		object IElementFactory.CreateElement(object objectToRender, string rendermode)
+		public object LabelElement
 		{
-			return this.CreateElement(objectToRender, rendermode);
+			get
+			{
+				return this.labelElement;
+			}
 		}
 		
-		object IElementFactory.CreateElement(Type sourceType, string bindingPath, string rendermode)
+		public object EditorElement
 		{
-			return this.CreateElement(sourceType, bindingPath, rendermode);
+			get
+			{
+				return this.editorElement;
+			}
+		}
+		
+		public object Source
+		{
+			get
+			{
+				return this.source;
+			}
+		}
+		
+		public BindingInformation BindingInfo
+		{
+			get
+			{
+				return this.bindingInfo;
+			}
 		}
 	}
 }

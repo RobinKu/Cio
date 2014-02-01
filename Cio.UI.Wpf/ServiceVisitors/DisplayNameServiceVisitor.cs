@@ -17,21 +17,25 @@
  */
 using System;
 using System.Windows.Controls;
+using Cio.UI.Services;
 
 namespace Cio.UI.Wpf.ServiceVisitors
 {
-	public class DisplayNameServiceVisitor : DefaultSingleServiceVisitor<IDisplayNameService>
+	public class DisplayNameServiceVisitor : DefaultSingleFormServiceVisitor
 	{
 		public DisplayNameServiceVisitor()
 		{
+			SetServiceType<IDisplayNameService>();
 			SetLabelElementType<TextBlock>();
 		}
 		
-		protected override void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IDisplayNameService service)
+		protected override void VisitInternal(BindingInformation info, FormResult result, object service)
 		{
-			TextBlock tb = (TextBlock)labelElement;
+			IDisplayNameService typedService = (IDisplayNameService)service;
 			
-			tb.Text = service.GetDisplayName(source, bindingPath);
+			TextBlock tb = (TextBlock)result.LabelElement;
+			
+			tb.Text = typedService.GetDisplayName(info.SourceType, info.BindingPath);
 		}
 	}
 }

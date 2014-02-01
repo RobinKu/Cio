@@ -19,8 +19,17 @@ using System;
 
 namespace Cio.UI
 {
-	public interface INestingDisplayNameService : IDisplayNameService
+	public class ColumnResult : IResult
 	{
-		IDisplayNameService GetInnerDisplayNameService();
+        public ColumnResult(object columnElement)
+		{
+            this.ColumnElement = columnElement;
+		}
+
+        public object ColumnElement 
+		{
+			get;
+			private set;
+		}
 	}
 }

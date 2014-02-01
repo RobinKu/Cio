@@ -16,27 +16,23 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Cio.Reflection;
 
-namespace Cio.UI
+namespace Cio
 {
-	public class CioForm<T> : CioBindableBlock<IFormBuilder, T, T>
+	public static class TypeExtensions
 	{
-		public CioForm(CioConfiguration config, IFormBuilder formBuilder)
-			: base (config, formBuilder)
+		public static bool IsEqualOrDerivedFrom(this Type type, Type baseType)
 		{
-		}
-		
-		protected override BasicBindingInformation CreateBindingInformation(string bindingPath, string rendermode, IEnumerable<object> services)
-		{
-			BindingInformation info = new BindingInformation();
-			info.SourceType = typeof(T);
+			if (type == null)
+			{
+				throw new ArgumentNullException("type");
+			}
+			else if (baseType == null)
+			{
+				throw new ArgumentNullException("baseType");
+			}
 			
-			return info;
+			return baseType.IsAssignableFrom(type);
 		}
 	}
 }

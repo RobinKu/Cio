@@ -24,72 +24,22 @@ using System.Windows.Controls;
 
 namespace Cio.UI.Wpf
 {
-	public class WpfFormBuilder : IFormBuilder
-	{
-		private CioConfiguration configuration;
-		private IElementResolver resolver;
-		private IList<IServiceVisitor> serviceVisitors = new List<IServiceVisitor>();
-		private IList<object> services = new List<object>();
-		
-		public WpfFormBuilder(CioConfiguration configuration, IElementResolver resolver)
-		{
-			if (configuration == null)
-			{
-				throw new ArgumentNullException("configuration");
-			}
-			else if (resolver == null)
-			{
-				throw new ArgumentNullException("resolver");
-			}
-			
-			this.configuration = configuration;
-			this.resolver = resolver;
-		}
-		
-		private IEnumerable<IServiceVisitor> ServiceVisitors
-		{
-			get
-			{
-				return this.serviceVisitors.Concat(this.configuration.ServiceVisitors);
-			}
-		}
-		
-		private IEnumerable<object> Services
-		{
-			get
-			{
-				return this.services.Concat(this.configuration.Services);
-			}
-		}
-		
-		public void RegisterServiceVisitor(IServiceVisitor serviceVisitor)
-		{
-			this.serviceVisitors.Add(serviceVisitor);
-		}
-		
-		public void UnregisterServiceVisitor(IServiceVisitor serviceVisitor)
-		{
-			this.serviceVisitors.Remove(serviceVisitor);
-		}
-		
-		public void RegisterService(object service)
-		{
-			this.services.Add(service);
-		}
-		
-		public void UnregisterService(object service)
-		{
-			this.services.Remove(service);
-		}
-		
-		public object CreateForm()
-		{
-			ItemsControl panel = new ItemsControl();
-			
-			FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(ColumnWrapPanel));
+    public class WpfFormBuilder : FormBuilder
+    {
+        public WpfFormBuilder(IElementResolver resolver)
+            : base(resolver)
+        {
+        }
+
+        public override object CreateBlock()
+        {
+            ItemsControl panel = new ItemsControl();
+
+            FrameworkElementFactory frameworkElementFactory = new FrameworkElementFactory(typeof(ColumnWrapPanel));
             panel.ItemsPanel = new ItemsPanelTemplate(frameworkElementFactory);
-            
+
             return panel;
+<<<<<<< HEAD
 		}
 		
 		public object Add(object form, object source, string bindingPath, string rendermode, params object[] services)
@@ -129,4 +79,34 @@ namespace Cio.UI.Wpf
 			return editorElement;
 		}
 	}
+=======
+        }
+
+        public override IResult Add(BindingInformation info)
+        {
+            ItemsControl panel = this.ValidateAsBaseClass<ItemsControl>(info.AddTo);
+
+            FormResult result = this.CreateBindingResult(info);
+
+            panel.Items.Add(result.LabelElement);
+            panel.Items.Add(result.EditorElement);
+
+            OnAdded(info, result);
+
+            return result;
+        }
+
+        public override void Bind(object block, object bindableOBject)
+        {
+            if (block == null)
+            {
+                throw new ArgumentNullException("block");
+            }
+
+            ItemsControl panel = ValidateAsBaseClass<ItemsControl>(block);
+
+            panel.DataContext = bindableOBject;
+        }
+    }
+>>>>>>> origin/grid
 }

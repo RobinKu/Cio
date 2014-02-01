@@ -19,7 +19,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
 	public abstract class BaseEditableService : IEditableService
 	{

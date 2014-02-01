@@ -16,35 +16,20 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
+using Cio.UI;
 
-namespace Cio.UI
+namespace TestApp
 {
-	public class AttributedDisplayNameService : NestingDisplayNameService
+	public class UserForm : CioForm<User>
 	{
-		public AttributedDisplayNameService(IDisplayNameService innerDisplayNameService)
-			: base(innerDisplayNameService)
+		public UserForm(CioConfiguration config, IFormBuilder formBuilder)
+			: base(config, formBuilder)
 		{
-		}
-		
-		protected override bool TryGetDisplayName(object source, string bindingPath, out string displayName)
-		{
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
-			
-			DisplayNameAttribute att = property.GetCustomAttribute<DisplayNameAttribute>(true);
-			
-			bool hasAttribute = att != null;
-			
-			if (hasAttribute)
-			{
-				displayName = att.Name;
-			}
-			else
-			{
-				displayName = null;
-			}
-			
-			return hasAttribute;
+			Add(u => u.Name);
+			Add(u => u.Password, RenderModes.Readonly);
+			Add(u => u.Signature, RenderModes.Multiline);
+			Add(u => u.IsActive);
+			Add(u => u.Profile.Text);
 		}
 	}
 }

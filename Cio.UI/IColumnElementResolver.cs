@@ -19,18 +19,10 @@ using System;
 
 namespace Cio.UI
 {
-	public class ManualEditableService : BaseEditableService
-	{
-		public void EnableEditing()
-		{
-			this.Editable = true;
-			this.DisabledReason = string.Empty;
-		}
-		
-		public void DisabledEditing(string reason)
-		{
-			this.Editable = false;
-			this.DisabledReason = reason;
-		}
-	}
+    public interface IColumnElementResolver
+    {
+        IColumnElementFactory ResolveColumn(Type type);
+
+        IColumnElementFactory ResolveColumn(Type type, string rendermode);
+    }
 }

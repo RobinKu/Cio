@@ -16,28 +16,22 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	internal class FieldBindingInfo
+	public interface IEditableService : INotifyPropertyChanged
 	{
-		internal string BindingPath
+		event EventHandler EditableChanged;
+		
+		bool Editable
 		{
 			get;
-			set;
 		}
 		
-		internal string Rendermode
+		string DisabledReason
 		{
 			get;
-			set;
-		}
-		
-		internal IEnumerable<object> Services
-		{
-			get;
-			set;
 		}
 	}
 }

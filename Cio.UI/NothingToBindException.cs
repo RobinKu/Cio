@@ -19,22 +19,20 @@ using System;
 
 namespace Cio.UI
 {
-	public static class EditableService
+	public class NothingToBindException : CioException
 	{
-		public static IEditableService AlwaysEditable
+		public NothingToBindException()
 		{
-			get
-			{
-				return new StaticEditableService(true);
-			}
 		}
 		
-		public static IEditableService NeverEditable
+		public NothingToBindException(string message)
+			: base(message)
 		{
-			get
-			{
-				return new StaticEditableService(false);
-			}
+		}
+		
+		public NothingToBindException(string message, Exception innerException)
+			: base(message, innerException)
+		{
 		}
 	}
 }

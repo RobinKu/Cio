@@ -18,7 +18,7 @@
 using System;
 using System.Reflection;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
 	public abstract class NestingDisplayNameService : INestingDisplayNameService
 	{
@@ -34,18 +34,18 @@ namespace Cio.UI
 			return this.innerDisplayNameService;
 		}
 		
-		public string GetDisplayName(object source, string bindingPath)
+		public string GetDisplayName(Type sourceType, string bindingPath)
 		{
 			string displayName;
 			
-			if (!this.TryGetDisplayName(source, bindingPath, out displayName))
+			if (!this.TryGetDisplayName(sourceType, bindingPath, out displayName))
 			{
-				displayName = this.innerDisplayNameService.GetDisplayName(source, bindingPath);
+				displayName = this.innerDisplayNameService.GetDisplayName(sourceType, bindingPath);
 			}
 			
 			return displayName;
 		}
 		
-		protected abstract bool TryGetDisplayName(object source, string bindingPath, out string displayName);
+		protected abstract bool TryGetDisplayName(Type sourceType, string bindingPath, out string displayName);
 	}
 }

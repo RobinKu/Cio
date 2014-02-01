@@ -16,12 +16,21 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Reflection;
 
 namespace Cio.UI
 {
-	public interface IDisplayNameService
+	public class BindingInformation : BasicBindingInformation
 	{
-		string GetDisplayName(object source, string bindingPath);
+		public Type SourceType
+		{
+			get;
+			set;
+		}
+		
+		public object Source
+		{
+			get;
+			set;
+		}
 	}
 }

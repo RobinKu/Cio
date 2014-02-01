@@ -21,56 +21,60 @@ using System.Linq;
 
 namespace Cio.UI
 {
-	public abstract class DefaultServiceVisitor<TService> : IServiceVisitor
+	public abstract class DefaultServiceVisitor : IServiceVisitor
 	{
-		private Type labelElementType;
-		private Type editorElementType;
-		private string renderModeFilter;
+		private Type serviceType;
+		private Type informationType;
+		private Type resultType;
 		
-		protected void SetLabelElementType<T>()
+		public DefaultServiceVisitor()
 		{
-			this.labelElementType = typeof(T);
 		}
 		
-		protected void SetEditorElementType<T>()
+		protected void SetServiceType<TService>()
 		{
-			this.editorElementType = typeof(T);
+			this.serviceType = typeof(TService);
 		}
 		
-		protected void SetRendeModeFilter(string renderModeFilter)
+		protected void SetInformationType<TInformation>()
 		{
-			this.renderModeFilter = renderModeFilter;
+			this.informationType = typeof(TInformation);
 		}
 		
-		public void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEnumerable<object> services)
+		protected void SetResultType<TResult>()
+			where TResult : IResult
 		{
-			if (labelElement == null)
+			this.resultType = typeof(TResult);
+		}
+		
+		public void Visit(AddInformation info, IResult result, IEnumerable<object> services)
+		{
+			if (info == null)
 			{
-				throw new ArgumentNullException("labelElement");
+				throw new ArgumentNullException("info");
 			}
-			else if (editorElement == null)
+			else if (result == null)
 			{
-				throw new ArgumentNullException("editorElement");
+				throw new ArgumentNullException("result");
 			}
 			else if (services == null)
 			{
 				throw new ArgumentNullException("services");
 			}
 			
-			if (ValidateElementType(labelElement.GetType(), this.labelElementType) &&
-			    ValidateElementType(editorElement.GetType(), this.editorElementType) &&
-			    ValidateRenderMode(renderMode))
+			if ((this.resultType == null || result.GetType().IsEqualOrDerivedFrom(this.resultType)) &&
+			    (this.informationType == null || info.GetType().IsEqualOrDerivedFrom(this.informationType)))
 			{
-				IEnumerable<TService> typedServices = services
-					.OfType<TService>();
-				
-				if (typedServices.Any())
+				if (this.serviceType != null)
 				{
-					Visit(labelElement, editorElement, source, bindingPath, renderMode, typedServices);
+					services = services.Where(s => s.GetType().IsEqualOrDerivedFrom(this.serviceType));
 				}
+				
+				this.VisitInternal(info, result, services);
 			}
 		}
 		
+<<<<<<< HEAD
 		private bool ValidateElementType(Type elementType, Type neededType)
 		{
 			return neededType == null || neededType.IsAssignableFrom(elementType);
@@ -82,5 +86,8 @@ namespace Cio.UI
 		}
 		
 		protected abstract void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEnumerable<TService> services);
+=======
+		protected abstract void VisitInternal(AddInformation info, IResult result, IEnumerable<object> services);
+>>>>>>> origin/grid
 	}
 }

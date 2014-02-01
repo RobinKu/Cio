@@ -16,18 +16,21 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Cio.UI
+namespace Cio.UI.Services
 {
-	public abstract class DefaultSingleServiceVisitor<T> : DefaultServiceVisitor<T>
+	public class ManualEditableService : BaseEditableService
 	{
-		protected sealed override void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEnumerable<T> services)
+		public void EnableEditing()
 		{
-			Visit(labelElement, editorElement, source, bindingPath, renderMode, services.First());
+			this.Editable = true;
+			this.DisabledReason = string.Empty;
 		}
 		
-		protected abstract void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, T service);
+		public void DisabledEditing(string reason)
+		{
+			this.Editable = false;
+			this.DisabledReason = reason;
+		}
 	}
 }

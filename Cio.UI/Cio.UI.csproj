@@ -52,36 +52,61 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributedDisplayNameService.cs" />
-    <Compile Include="BaseEditableService.cs" />
+    <Compile Include="BasicBindingInformation.cs" />
+    <Compile Include="BindableBlockBuilder.cs" />
+    <Compile Include="BindingInformation.cs" />
+    <Compile Include="AddedEventArgs.cs" />
+    <Compile Include="AddInformation.cs" />
     <Compile Include="BaseElementFactory.cs" />
     <Compile Include="BindingPathUtility.cs" />
+    <Compile Include="BlockBuilder.cs" />
+    <Compile Include="CioBindableBlock.cs" />
     <Compile Include="CioConfiguration.cs" />
+    <Compile Include="CioDataGrid.cs" />
     <Compile Include="CioForm.cs" />
+    <Compile Include="CioBlock.cs" />
+    <Compile Include="ColumnBindingInformation.cs" />
+    <Compile Include="ColumnResult.cs" />
+    <Compile Include="DataGridBuilder.cs" />
+    <Compile Include="DefaultFormServiceVisitor.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />
-    <Compile Include="DefaultSingleServiceVisitor.cs" />
+    <Compile Include="DefaultSingleFormServiceVisitor.cs" />
     <Compile Include="DisplayNameAttribute.cs" />
-    <Compile Include="EditableService.cs" />
     <Compile Include="ElementNotFoundException.cs" />
+    <Compile Include="ElementPairAddedEventArgs.cs" />
     <Compile Include="ElementResolverExtensions.cs" />
-    <Compile Include="FieldBindingInfo.cs" />
-    <Compile Include="IDisplayNameService.cs" />
-    <Compile Include="IEditableService.cs" />
+    <Compile Include="FormBuilder.cs" />
+    <Compile Include="FormResult.cs" />
+    <Compile Include="IBindableBlockBuilder.cs" />
+    <Compile Include="IBlockBuilder.cs" />
+    <Compile Include="IColumnElementFactory.cs" />
+    <Compile Include="IColumnElementResolver.cs" />
+    <Compile Include="IDataGridBuilder.cs" />
     <Compile Include="IElementConfiguration.cs" />
     <Compile Include="IElementFactory.cs" />
     <Compile Include="IElementResolver.cs" />
     <Compile Include="IFormBuilder.cs" />
     <Compile Include="INeedElementResolver.cs" />
-    <Compile Include="INestingDisplayNameService.cs" />
     <Compile Include="InvalidBindingPathException.cs" />
+    <Compile Include="IResult.cs" />
+    <Compile Include="IServiceRegistrable.cs" />
     <Compile Include="IServiceVisitor.cs" />
-    <Compile Include="ManualEditableService.cs" />
-    <Compile Include="NestingDisplayNameService.cs" />
+    <Compile Include="IServiceVisitorRegistrable.cs" />
+    <Compile Include="MissingInformationHandlerException.cs" />
+    <Compile Include="NothingToBindException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyDisplayNameService.cs" />
     <Compile Include="RenderModes.cs" />
     <Compile Include="ResolveException.cs" />
-    <Compile Include="StaticEditableService.cs" />
+    <Compile Include="Services\AttributedDisplayNameService.cs" />
+    <Compile Include="Services\BaseEditableService.cs" />
+    <Compile Include="Services\EditableService.cs" />
+    <Compile Include="Services\IDisplayNameService.cs" />
+    <Compile Include="Services\IEditableService.cs" />
+    <Compile Include="Services\INestingDisplayNameService.cs" />
+    <Compile Include="Services\ManualEditableService.cs" />
+    <Compile Include="Services\NestingDisplayNameService.cs" />
+    <Compile Include="Services\PropertyDisplayNameService.cs" />
+    <Compile Include="Services\StaticEditableService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cio\Cio.csproj">
@@ -89,5 +114,6 @@
       <Name>Cio</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

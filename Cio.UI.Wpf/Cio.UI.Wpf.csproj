@@ -69,6 +69,7 @@
     <Compile Include="BindingUtility.cs" />
     <Compile Include="ColumnWrapPanel.cs" />
     <Compile Include="Converters\CustomBooleanToVisibilityConverter.cs" />
+    <Compile Include="WpfDataGridBuilder.cs" />
     <Compile Include="ElementConfigurationExtensions.cs" />
     <Compile Include="ElementFactories\CalendarFactory.cs" />
     <Compile Include="ElementFactories\CheckBoxFactory.cs" />
@@ -98,5 +99,6 @@
     <Folder Include="ElementFactories" />
     <Folder Include="ServiceVisitors" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
