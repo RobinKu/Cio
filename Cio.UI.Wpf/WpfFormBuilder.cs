@@ -39,47 +39,6 @@ namespace Cio.UI.Wpf
             panel.ItemsPanel = new ItemsPanelTemplate(frameworkElementFactory);
 
             return panel;
-<<<<<<< HEAD
-		}
-		
-		public object Add(object form, object source, string bindingPath, string rendermode, params object[] services)
-		{
-			if (form == null)
-			{
-				throw new ArgumentNullException("form");
-			}
-			else if (services == null)
-			{
-				throw new ArgumentNullException("services");
-			}
-			
-			ItemsControl panel = form as ItemsControl;
-			
-			if (panel == null)
-			{
-				throw new ArgumentException("form must derive from ItemsControl. Use the CreateForm() method of the formbuilder to create the right type.");
-			}
-			
-			PropertyInfo property = BindingPathUtility.GetProperty(source, bindingPath);
-			
-			IElementFactory labelFactory = this.resolver.Resolve<string>(RenderModes.EditorLabel);
-			object labelElement = labelFactory.CreateElement(RenderModes.EditorLabel);
-			
-			IElementFactory editorFactory = this.resolver.Resolve(property.PropertyType, rendermode);
-			object editorElement = editorFactory.CreateElement(source, bindingPath, rendermode);
-			
-			foreach (IServiceVisitor visitor in ServiceVisitors)
-			{
-				visitor.Visit(labelElement, editorElement, source, bindingPath, rendermode, services.Concat(this.Services));
-			}
-			
-			panel.Items.Add(labelElement);
-			panel.Items.Add(editorElement);
-			
-			return editorElement;
-		}
-	}
-=======
         }
 
         public override IResult Add(BindingInformation info)
@@ -108,5 +67,4 @@ namespace Cio.UI.Wpf
             panel.DataContext = bindableOBject;
         }
     }
->>>>>>> origin/grid
 }

@@ -64,18 +64,7 @@ namespace TestApp
 			
 			IFormBuilder formBuilder = new WpfFormBuilder(resolver);
 			
-<<<<<<< HEAD
-			CioForm<User> form = new CioForm<User>(formBuilder);
-			
-			form.Add(u => u.Name);
-			form.Add(u => u.Password, RenderModes.Readonly);
-			form.Add(u => u.Signature, RenderModes.Multiline);
-			form.Add(u => u.IsActive);
-			form.Add(u => u.DateOfBirth, RenderModes.DateOnly);
-			form.Add(u => u.Profile.Text);
-=======
 			var form = new UserForm(config, formBuilder);
->>>>>>> origin/grid
 			
 			User user = CreateUser();
 			

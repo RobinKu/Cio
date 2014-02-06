@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D882DAED-D69B-48AE-A01F-E72DDE128202}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FullCioApp</RootNamespace>
+    <AssemblyName>FullCioApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>FullCioApp.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cio.UI.Composition.Default\Cio.UI.Composition.Default.csproj">
+      <Project>{690ba2e1-3fef-4b68-9ec0-526ee200bc7f}</Project>
+      <Name>Cio.UI.Composition.Default</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cio.UI.Configuration\Cio.UI.Configuration.csproj">
+      <Project>{21b2e216-8089-4c54-99b1-f9df8dac8d1f}</Project>
+      <Name>Cio.UI.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cio.UI.Wpf\Cio.UI.Wpf.csproj">
+      <Project>{5ca378b2-1fbd-46c4-bcb9-67bda65343d4}</Project>
+      <Name>Cio.UI.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cio.UI\Cio.UI.csproj">
+      <Project>{130f17dd-0f3f-4446-8c35-5265ca6310ea}</Project>
+      <Name>Cio.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cio\Cio.csproj">
+      <Project>{43470fcd-2d83-4b18-8472-ea9b64f0faa5}</Project>
+      <Name>Cio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

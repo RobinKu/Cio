@@ -36,20 +36,14 @@ namespace Cio.UI.Wpf.ElementFactories
 			
 			return cb;
 		}
-		
-<<<<<<< HEAD:Cio.UI.Wpf/ElementFactories/CheckBoxFactory.cs
-		public override CheckBox CreateElement(object source, string bindingPath, string rendermode)
-		{
-			CheckBox cb = this.CreateElement(rendermode);
-			BindingUtility.AddBinding(cb, CheckBox.IsCheckedProperty, source, bindingPath);
-=======
-		public override FrameworkElement CreateElement(Type sourceType, string bindingPath, string rendermode)
+
+        public override CheckBox CreateElement(Type sourceType, string bindingPath, string rendermode)
 		{
 			Binding binding = new Binding(bindingPath);
 			
-			FrameworkElement cb = (FrameworkElement)CreateElement(rendermode);
-			cb.SetBinding(CheckBox.IsCheckedProperty, binding);
->>>>>>> origin/grid:Cio.UI.Wpf/BooleanElementFactory.cs
+            CheckBox cb = CreateElement(rendermode);
+
+            BindingUtility.AddBinding(cb, CheckBox.IsCheckedProperty, bindingPath);
 			
 			return cb;
 		}
