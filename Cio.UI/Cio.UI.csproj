@@ -67,6 +67,7 @@
     <Compile Include="CioBlock.cs" />
     <Compile Include="ColumnBindingInformation.cs" />
     <Compile Include="ColumnResult.cs" />
+    <Compile Include="CioWindow.cs" />
     <Compile Include="DataGridBuilder.cs" />
     <Compile Include="DefaultFormServiceVisitor.cs" />
     <Compile Include="DefaultServiceVisitor.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="IServiceRegistrable.cs" />
     <Compile Include="IServiceVisitor.cs" />
     <Compile Include="IServiceVisitorRegistrable.cs" />
+    <Compile Include="IWindowBuilder.cs" />
     <Compile Include="MissingInformationHandlerException.cs" />
     <Compile Include="NothingToBindException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -46,11 +46,11 @@ namespace Cio.UI.Wpf.ElementFactories
 			return txt;
 		}
 		
-		public override TextBlock CreateElement(object source, string bindingPath, string rendermode)
+		public override TextBlock CreateElement(Type sourceType, string bindingPath, string rendermode)
 		{
 			TextBlock txt = CreateElement(rendermode);
 
-			BindingUtility.AddBinding(txt, TextBlock.TextProperty, source, bindingPath);
+			BindingUtility.AddBinding(txt, TextBlock.TextProperty, bindingPath);
 			
 			return txt;
 		}

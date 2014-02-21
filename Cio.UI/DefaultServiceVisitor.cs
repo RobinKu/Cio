@@ -74,20 +74,6 @@ namespace Cio.UI
 			}
 		}
 		
-<<<<<<< HEAD
-		private bool ValidateElementType(Type elementType, Type neededType)
-		{
-			return neededType == null || neededType.IsAssignableFrom(elementType);
-		}
-		
-		private bool ValidateRenderMode(string renderMode)
-		{
-			return string.IsNullOrWhiteSpace(this.renderModeFilter) || this.renderModeFilter == renderMode;
-		}
-		
-		protected abstract void Visit(object labelElement, object editorElement, object source, string bindingPath, string renderMode, IEnumerable<TService> services);
-=======
 		protected abstract void VisitInternal(AddInformation info, IResult result, IEnumerable<object> services);
->>>>>>> origin/grid
 	}
 }

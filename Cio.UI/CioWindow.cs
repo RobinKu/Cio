@@ -16,35 +16,19 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
-using System.Windows;
-using System.Windows.Data;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using Cio.Reflection;
 
-namespace Cio.UI.Wpf
+namespace Cio.UI
 {
-	public static class BindingUtility
+	public class CioWindow : CioBlock<IWindowBuilder>
 	{
-		public static Binding CreateBinding(object source, string bindingPath)
+        public CioWindow(CioConfiguration config, IWindowBuilder windowBuilder)
+            : base(config, windowBuilder)
 		{
-			Binding binding = new Binding(bindingPath);
-			binding.Source = source;
-			
-			return binding;
-		}
-		
-		public static void AddBinding(FrameworkElement element, DependencyProperty property, string bindingPath)
-		{
-			if (element == null)
-			{
-				throw new ArgumentNullException("element");
-			}
-			else if (property == null)
-			{
-				throw new ArgumentNullException("property");
-			}
-
-            Binding binding = new Binding(bindingPath);
-			
-			element.SetBinding(property, binding);
 		}
 	}
 }

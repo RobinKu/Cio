@@ -51,13 +51,13 @@ namespace Cio.UI.Wpf.ElementFactories
 			return tb;
 		}
 		
-		public override TextBox CreateElement(object source, string bindingPath, string rendermode)
-		{
-			TextBox tb = CreateElement(rendermode);
-			
-			BindingUtility.AddBinding(tb, TextBox.TextProperty, source, bindingPath);
-			
-			return tb;
-		}
-	}
+        public override TextBox CreateElement(Type sourceType, string bindingPath, string rendermode)
+        {
+            TextBox tb = CreateElement(rendermode);
+
+            BindingUtility.AddBinding(tb, TextBox.TextProperty, bindingPath);
+
+            return tb;
+        }
+    }
 }

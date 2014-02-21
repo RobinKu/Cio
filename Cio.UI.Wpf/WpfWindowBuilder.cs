@@ -16,35 +16,27 @@
  * along with this program.  If not, see [http://www.gnu.org/licenses/].
  */
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
-namespace Cio.UI.Wpf.ElementFactories
+namespace Cio.UI.Wpf
 {
-	public class CalendarFactory : WpfElementFactory<Calendar>
-	{
-		public override Calendar CreateElement(string renderMode)
-		{
-			Calendar cal = new Calendar();
-			
-			return cal;
-		}
-		
-		public override Calendar CreateElement(object objectToRender, string rendermode)
-		{
-			Calendar cal = this.CreateElement(rendermode);
-			
-			cal.DisplayDate = Convert.ToDateTime(objectToRender);
-			
-			return cal;
-		}
-
-        public override Calendar CreateElement(Type sourceType, string bindingPath, string rendermode)
+    public class WpfWindowBuilder : BlockBuilder, IWindowBuilder
+    {
+        public override object CreateBlock()
         {
-            Calendar cal = this.CreateElement(rendermode);
+            Window window = new Window();
+            window.Show();
 
-            BindingUtility.AddBinding(cal, Calendar.DisplayDateProperty, bindingPath);
+            return window;
+        }
 
-            return cal;
+        public override IResult Add(AddInformation info)
+        {
+            
         }
     }
 }
