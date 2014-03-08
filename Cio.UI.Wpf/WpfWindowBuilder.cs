@@ -36,7 +36,7 @@ namespace Cio.UI.Wpf
 
         public override IResult Add(AddInformation info)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
