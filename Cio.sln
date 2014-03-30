@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.UI", "Cio.UI\Cio.UI.csproj", "{130F17DD-0F3F-4446-8C35-5265CA6310EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.UI.Composition.Default", "Cio.UI.Composition.Default\Cio.UI.Composition.Default.csproj", "{690BA2E1-3FEF-4B68-9EC0-526EE200BC7F}"
@@ -18,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.Test", "Cio.Test\Cio.Test.csproj", "{67FA00FB-F979-48BB-858A-9999913E05B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullCioApp", "FullCioApp\FullCioApp.csproj", "{D882DAED-D69B-48AE-A01F-E72DDE128202}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cio.Validation", "Cio.Validation\Cio.Validation.csproj", "{7B0A6591-4D85-4D54-A971-8EE7F9844969}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{D882DAED-D69B-48AE-A01F-E72DDE128202}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D882DAED-D69B-48AE-A01F-E72DDE128202}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D882DAED-D69B-48AE-A01F-E72DDE128202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B0A6591-4D85-4D54-A971-8EE7F9844969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0A6591-4D85-4D54-A971-8EE7F9844969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B0A6591-4D85-4D54-A971-8EE7F9844969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0A6591-4D85-4D54-A971-8EE7F9844969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

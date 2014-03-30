@@ -80,6 +80,7 @@
     <Compile Include="Properties\WPFAssemblyInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserForm.cs" />
+    <Compile Include="UserValidator.cs" />
     <Compile Include="Window1.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -104,6 +105,10 @@
     <ProjectReference Include="..\Cio.UI\Cio.UI.csproj">
       <Project>{130F17DD-0F3F-4446-8C35-5265CA6310EA}</Project>
       <Name>Cio.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cio.Validation\Cio.Validation.csproj">
+      <Project>{7b0a6591-4d85-4d54-a971-8ee7f9844969}</Project>
+      <Name>Cio.Validation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

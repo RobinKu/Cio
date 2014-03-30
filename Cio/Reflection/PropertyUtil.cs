@@ -23,57 +23,69 @@ using System.Reflection;
 
 namespace Cio.Reflection
 {
-	public static class PropertyUtil
-	{
-		public static IEnumerable<string> GetPropertyNames<T, TResult>(Expression<Func<T, TResult>> property)
-		{
-			if (property == null)
-			{
-				throw new ArgumentNullException("property");
-			}
-			
-			ICollection<string> propertyNames = new List<string>();
-			
-			MemberExpression memExpr = property.Body as MemberExpression;
-			
-			while (memExpr != null)
-			{
-				if (memExpr.Member.MemberType != MemberTypes.Property)
-				{
-					throw new InvalidPropertyExpressionException("Only properties are allowed to be added");
-				}
-				
-				propertyNames.Add(memExpr.Member.Name);
-				
-				memExpr = memExpr.Expression as MemberExpression;
-			}
-			
-			return propertyNames;
-		}
-		
-		public static string GetPropertyName<T, TResult>(Expression<Func<T, TResult>> property)
-		{
-			try
-			{
-				return GetPropertyNames(property).Single();
-			}
-			catch (InvalidOperationException ex)
-			{
-				throw new InvalidPropertyExpressionException("No property could be found in the provided expression.", ex);
-			}
-		}
-	}
-	
-	public static class PropertyUtil<T>
-	{
-		public static IEnumerable<string> GetPropertyNames<TResult>(Expression<Func<T, TResult>> property)
-		{
-			return PropertyUtil.GetPropertyNames(property);
-		}
-		
-		public static string GetPropertyName<TResult>(Expression<Func<T, TResult>> property)
-		{
-			return PropertyUtil.GetPropertyName(property);
-		}
-	}
+    public static class PropertyUtil
+    {
+        public static IEnumerable<string> GetPropertyNames<T, TResult>(Expression<Func<T, TResult>> property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            ICollection<string> propertyNames = new List<string>();
+
+            MemberExpression memExpr = property.Body as MemberExpression;
+
+            while (memExpr != null)
+            {
+                if (memExpr.Member.MemberType != MemberTypes.Property)
+                {
+                    throw new InvalidPropertyExpressionException("Only properties are allowed to be added");
+                }
+
+                propertyNames.Add(memExpr.Member.Name);
+
+                memExpr = memExpr.Expression as MemberExpression;
+            }
+
+            return propertyNames;
+        }
+
+        public static string GetPropertyName<T, TResult>(Expression<Func<T, TResult>> property)
+        {
+            try
+            {
+                return GetPropertyNames(property).Single();
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidPropertyExpressionException("No property could be found in the provided expression.", ex);
+            }
+        }
+
+        public static object GetPropertyValue(object obj, string propertyName)
+        {
+            PropertyInfo property = obj.GetType().GetProperty(propertyName);
+
+            if (property == null)
+            {
+                throw new InvalidOperationException("Property does not exist or is not public.");
+            }
+
+            return property.GetValue(obj);
+        }
+    }
+
+    public static class PropertyUtil<T>
+    {
+        public static IEnumerable<string> GetPropertyNames<TResult>(Expression<Func<T, TResult>> property)
+        {
+            return PropertyUtil.GetPropertyNames(property);
+        }
+
+        public static string GetPropertyName<TResult>(Expression<Func<T, TResult>> property)
+        {
+            return PropertyUtil.GetPropertyName(property);
+        }
+    }
 }
