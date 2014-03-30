@@ -57,8 +57,11 @@
     <Compile Include="CioException.cs" />
     <Compile Include="Collections\Generic\DictionaryExtensions.cs" />
     <Compile Include="ComponentModel\BackingFieldSetter.cs" />
+    <Compile Include="ComponentModel\DetailedPropertyChangedEventArgs.cs" />
+    <Compile Include="ComponentModel\DetailedPropertyChangedHandler.cs" />
     <Compile Include="ComponentModel\IImplementNotifyPropertyChanged.cs" />
     <Compile Include="ComponentModel\IImplementNotifyPropertyChanging.cs" />
+    <Compile Include="ComponentModel\INotifyDetailedPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\InvalidPropertyExpressionException.cs" />
     <Compile Include="Reflection\PropertyUtil.cs" />
